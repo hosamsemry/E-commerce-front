@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../css/login.css">
+    <title>Login</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <p class="welcome">Welcom Back! Please Login down here.</p>
+        </nav>
+      </header>
+
+
+    
+    <div id="login-form-div">
+        <h2>Login</h2>
+        <form id="login-form" onsubmit="return loginUser(event)">
+            <label for="username">Username:</label>
+            <input type="text" id="login-username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="login-password" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+    <script src="../js/main.js" defer></script>
+</body>
+</html>

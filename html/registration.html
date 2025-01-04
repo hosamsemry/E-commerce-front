@@ -1,0 +1,33 @@
+<html>
+<head>
+    <link rel="stylesheet" href="../css/register.css">
+    <title>registration</title>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <p class="welcome">Welcome to our E-commerce platform! Please register down here.</p>
+        </nav>
+      </header>
+    
+    
+    <div id="register-form-div">
+        <h2>Register</h2>
+        <form id="register-form" onsubmit="return registerUser(event)">
+            <label for="reg-username">Username:</label>
+            <input type="text" id="reg-username" required>
+            <label for="reg-password">Password:</label>
+            <input type="password" id="reg-password" required>
+            
+            <label for="reg-role">Role:</label>
+            <select id="reg-role" >
+                <option value="customer">Customer</option>
+                <option value="seller">Seller</option>
+            </select>
+            <button type="submit">Register</button>
+        </form>
+    </div>
+    <script src="../js/main.js" defer></script>
+</body>
+</html>

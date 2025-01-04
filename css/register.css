@@ -1,0 +1,88 @@
+body{
+  background-color: #e4e1e1;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  margin: 0px auto;
+  background-color: #e4610a;
+  color: #ffffff;
+  padding: 1px;
+}
+
+.welcome{
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+  }
+
+
+#register-form-div{
+    
+    width: 50%;
+    align-items: center;
+    margin: 100px auto;
+    margin-bottom: 30px;
+    padding: 10px;
+
+  }
+
+  
+  #register-form {
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 50px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+  }
+  
+  h2 {
+    text-align: center;
+    color: #e4610a;
+    font-size: 40px;
+  }
+
+  label {
+    font-weight: bold;
+    color: #e4610a;
+  }
+  
+  input[type="text"], input[type="password"] {
+    width: 80%;
+    padding: 10px;
+    margin: 20px auto;
+    margin-left: 80px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  select {
+    width: 80%;
+    padding: 10px;
+    margin: 10px;
+    margin-left: 110px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #e4610a;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition:.3s ease-out;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  

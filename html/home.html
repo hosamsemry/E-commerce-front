@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/home.css">
+    <title>Customer Home</title>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <img src="../images/logo.png" alt="E-commerce Logo" class="logo-img">
+            <h1>E-Commerce Platform</h1>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="products.html">Products</a></li>
+                <li class="dropdown">
+                    <a href="categories.html">Categories</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="electronics.html">Electronics</a></li>
+                        <li><a href="fashion.html">Fashion</a></li>
+                        <li><a href="home-appliance.html">Home Appliance</a></li>
+                        <li><a href="books.html">Books</a></li>
+                    </ul>
+                </li>
+                <li><a href="login.html">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+
+    <!-- Search Bar -->
+    <div class="search-bar">
+        <input type="text" id="search" placeholder="Search for products or categories">
+        <button id="search-button">Search</button>
+    </div>
+
+    <!-- Categories Section -->
+    <section class="categories">
+        <h2>Categories</h2>
+        <div id="category-grid" class="category-grid"></div>
+    </section>
+    
+
+    <!-- Products Section -->
+    <div id="products-container" class="products-section">
+        <h2>Products</h2>
+        <!-- Products will be dynamically loaded here -->
+    </div>
+    
+    <script src="../js/customer-home.js" defer></script>
+    
+
+    <!-- Footer Section -->
+    <footer>
+        <ul class="footer-links">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="terms.html">Terms of Service</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+        </ul>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>
