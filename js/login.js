@@ -1,28 +1,46 @@
+window.addEventListener('load', () => {
+  
+  const loginBtn = document.getElementById('login-btn');
 
-
-window.addEventListener('DOMContentLoaded', () => {
-  const loginForm = document.getElementById('login-form');
-
-  loginForm.addEventListener('submit', function (event) {
-      event.preventDefault();
-
+  loginBtn.addEventListener('click', function () {
+      
       // Get form data
       const username = document.getElementById('login-username').value;
       const password = document.getElementById('login-password').value;
 
-      // Retrieve users from sessionStorage
-      const users = JSON.parse(sessionStorage.getItem('users')) || [];
+      // Fetch data from db.json
+      fetch('../db.json')
+        .then(response => response.json())
+        .then(data => {
+          // Validate username and password
+          const user = data.users.find(user => user.username === username && user.password === password);
+          
+          if (user) {
+            alert('Login successful!');
 
-      // Authenticate user
-      const user = users.find(u => u.username === username && u.password === password);
-      if (user) {
-          alert(`Welcome, ${user.username}! Redirecting to homepage.`);
-          sessionStorage.setItem('currentUser', JSON.stringify(user)); // Store logged-in user
-          window.location.href = 'home.html';
-      } else {
-          alert('Invalid username or password. Please try again.');
-      }
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            
+            switch (user.role) {
+                case 'admin':
+                  window.location.href = '../html/admin-dashboard.html';
+                  break;
+                case 'seller':
+                  window.location.href = '../html/seller-dashboard.html';
+                  break;
+                case 'customer':
+                  window.location.href = '../html/home.html';
+                  break;
+                default:
+                  alert('Role not recognized');
+              }
+
+            // Redirect or perform other actions on successful login
+          } else {
+            alert('Invalid username or password');
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+        });
   });
 });
-
-
