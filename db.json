@@ -19,12 +19,6 @@
       "role": "customer"
     },
     {
-      "id": "5",
-      "username": "ahmed",
-      "password": "sellerpass2",
-      "role": "seller"
-    },
-    {
       "id": "6",
       "username": "mohamed",
       "password": "sellerpass3",
