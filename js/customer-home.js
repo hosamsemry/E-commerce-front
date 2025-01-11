@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Fetch the product data from db.json
-    fetch("../db.json") // Adjust the path if needed
+    fetch("http://localhost:3000/products") // Adjust the path if needed
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);

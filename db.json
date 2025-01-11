@@ -103,8 +103,14 @@
       "role": "customer"
     },
     {
-      "id": 20,
+      "id": "20",
       "username": "momo",
+      "password": "hosam",
+      "role": "customer"
+    },
+    {
+      "id": 20,
+      "username": "eman",
       "password": "hosam",
       "role": "customer"
     }
