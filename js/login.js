@@ -1,46 +1,55 @@
 window.addEventListener('load', () => {
-  
   const loginBtn = document.getElementById('login-btn');
 
   loginBtn.addEventListener('click', function () {
-      
-      // Get form data
-      const username = document.getElementById('login-username').value;
-      const password = document.getElementById('login-password').value;
 
-      // Fetch data from db.json
-      fetch('../db.json')
-        .then(response => response.json())
-        .then(data => {
-          // Validate username and password
-          const user = data.users.find(user => user.username === username && user.password === password);
-          
-          if (user) {
-            alert('Login successful!');
+    // Get form data
+    const username = document.getElementById('login-username').value;
+    const password = document.getElementById('login-password').value;
 
-            localStorage.setItem('currentUser', JSON.stringify(user));
-            
-            switch (user.role) {
-                case 'admin':
-                  window.location.href = '../html/admin-dashboard.html';
-                  break;
-                case 'seller':
-                  window.location.href = '../html/seller-dashboard.html';
-                  break;
-                case 'customer':
-                  window.location.href = '../html/home.html';
-                  break;
-                default:
-                  alert('Role not recognized');
-              }
+    // Basic validation
+    if (!username || !password) {
+      alert('Please enter both username and password');
+      return;
+    }
 
-            // Redirect or perform other actions on successful login
-          } else {
-            alert('Invalid username or password');
+  // Fetch data from db.json
+  fetch('http://localhost:3000/users')
+    .then(response => response.json())
+    .then(users => {
+      try {
+        const user = users.find(user => user.username.toLowerCase() === username.toLowerCase() &&
+          user.password === password);
+
+        if (user) {
+          localStorage.setItem('currentUser', JSON.stringify(user));
+
+          switch (user.role) {
+            case 'admin':
+              window.location.href = './admin-dashboard.html';
+              break;
+            case 'seller':
+              window.location.href = './seller-dashboard.html';
+              break;
+            case 'customer':
+              window.location.href = './home.html';
+              break;
+            default:
+              alert('Role not recognized');
           }
-        })
-        .catch(error => {
-          console.error('Error fetching data:', error);
-        });
+        } else {
+          alert('Invalid username or password');
+        }
+      } catch (error) {
+        console.error('Error processing data:', error);
+        alert('An error occurred while logging in. Please try again later.');
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching data:', error);
+      alert('An error occurred while logging in. Please try again later.');
+    });
+    });
   });
-});
+  
+
