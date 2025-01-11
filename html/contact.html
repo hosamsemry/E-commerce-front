@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="../css/contact.css">
+</head>
+<body>
+    <header>
+        <h1>E-Shop</h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="about.html">About As</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="contact-info">
+            <h2>Contact Us</h2>
+            <p>We'd love to hear from you! Fill out the form below or reach out to us directly.</p>
+
+            <div class="contact-details">
+                <p><strong>Email:</strong> support@eshop.com</p>
+                <p><strong>Phone:</strong> +1 (123) 456-7890</p>
+                <p><strong>Address:</strong> 123 E-Shop Street, City, Country</p>
+            </div>
+
+            <form id="contactForm">
+                <input type="text" id="name" placeholder="Your Name" required>
+                <input type="email" id="email" placeholder="Your Email" required>
+                <textarea id="message" placeholder="Your Message" rows="5" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+
+            <div id="formMessage"></div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 E-Shop. All rights reserved.</p>
+    </footer>
+
+    <script src="../js/contact.js"></script>
+</body>
+</html>

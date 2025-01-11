@@ -1,0 +1,132 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* Header */
+header {
+    background-color: #e4610a;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+
+}
+header h1 {
+    margin: -5px;
+    
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    margin-top: -30px;
+}
+
+header nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.3s ease;
+}
+
+header nav ul li a:hover {
+    background-color: #d14d07;
+    border-radius: 5px;
+}
+
+/* Main Content */
+main {
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.about {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 70%;
+    text-align: center;
+}
+
+.about h2 {
+    margin-bottom: 20px;
+    color: #e4610a;
+}
+
+.about p {
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+.about h3 {
+    margin-bottom: 25px;
+    margin-top: 25px;
+    color: #e4610a;
+}
+
+.about ul {
+    list-style: disc;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+    text-align: left;
+    margin: 0 auto;
+    margin-bottom: 15px;
+    width: 60%;
+}
+
+.about ul li {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Team Section */
+.team {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;  
+    margin-top: 20px;
+}
+
+.team-member {
+    text-align: center;
+    
+}
+
+.team-member img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 0.5rem;
+}
+
+.team-member h4 {
+    margin-top: 0.5rem;
+    color: #e4610a;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #e4610a;
+    color: white;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
