@@ -70,6 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             <img src="../${product.image}" alt="${product.name}">
                             <strong>${product.name}</strong>
                             <span class="price">$${product.price}</span> 
+                            <button class="add-to-cart-btn">Add to Cart</button>
                         </a>
                     `;
                     productList.appendChild(productItem);
