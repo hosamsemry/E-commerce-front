@@ -28,61 +28,62 @@ header {
   
 }
 
-#login-form-div{
-  width: 50%;
-  align-items: center;
-  margin: 150px auto;
-  margin-bottom: 30px;
+#login-form-div {
+  width: 40%;
+ 
+  margin: 100px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+#login-form h2 {
+  text-align: center;
+  color: #ffffff;
+  font-size: 32px;
+  background-color: #FF7043;
   padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
 
-  }
+input[type="text"], input[type="password"] {
+  width: 95%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+}
 
-  
-  #login-form{
-    width: 90%;
-    margin: 0 auto;
-    margin-bottom: 50px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: #f9f9f9;
-  }
-  
-  h2 {
-    text-align: center;
-    color: #e4610a;
-    font-size: 40px;
-  }
-  
-  input[type="text"], input[type="password"] {
-    width: 80%;
-    padding: 10px;
-    margin: 20px auto;
-    margin-left: 50px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
+input[type="checkbox"] {
+  margin-right: 10px;
+}
 
-  label {
-    font-weight: bold;
-    color: #e4610a;
-  }
-  
-  
+label {
+  color: #FF7043;
+  font-size: 14px;
+}
+
 button {
-    width: 100%;
-    padding: 10px;
-    background-color: #e4610a;
-    color: white;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: .3s ease-in;
-  }
-  
-  button:hover {
-    background-color: #45a049;
-  }
-  
+  width: 100%;
+  padding: 12px;
+  background-color: #FF7043;
+  color: #ffffff;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #FF5722; /* Darker shade on hover */
+}
+
+.remember {
+  display: inline-block;
+  font-size: 14px;
+  margin-top: 10px;
+}

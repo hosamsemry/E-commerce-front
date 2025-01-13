@@ -17,13 +17,16 @@
 
     
     <div id="login-form-div">
-        <h2>Login</h2>
+        
         <form id="login-form" onsubmit="return loginUser(event)">
+            <h2>Login Form</h2>
             <label for="username">Username:</label>
             <input type="text" id="login-username" required>
             <label for="password">Password:</label>
             <input type="password" id="login-password" required>
             <button type="submit" id="login-btn">Login</button>
+            <input type="checkbox" checked="checked" name="remember" class="remember"> Remember me
+    </label>
         </form>
     </div>
     <script src="../js/login.js" defer></script>
