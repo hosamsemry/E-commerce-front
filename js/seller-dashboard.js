@@ -1,139 +1,166 @@
 window.addEventListener('load', () => {
-    // Get the current user from sessionStorage
-    const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
-  
-    // Check if the user exists and has the 'seller' role
-    if (!currentUser || currentUser.role !== 'seller') {
-      window.location.href = './home.html'; // Redirect if not a seller
-    }
-  
-    // Set up event listeners
-    document.getElementById('addProductBtn').addEventListener('click', showProductForm);
-    document.getElementById('cancelBtn').addEventListener('click', hideProductForm);
-    document.getElementById('addProductForm').addEventListener('submit', addProduct);
-  
-    fetchProducts();
-  });
-  
-  // Fetch and display products for the current seller
-  async function fetchProducts() {
-    const res = await fetch('http://localhost:3000/products');
-    const products = await res.json();
-    const productList = document.getElementById('productList');
-    productList.innerHTML = '';
-    
-    // Filter products by seller ID
-    const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
-    const sellerProducts = products.filter(product => product.sellerId == currentUser.id);
-    
-    sellerProducts.forEach(product => {
+  const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+
+  if (!currentUser || currentUser.role !== 'seller') {
+      window.location.href = './home.html';
+  }
+
+  document.getElementById('addProductBtn').addEventListener('click', showProductForm);
+  document.getElementById('cancelBtn').addEventListener('click', hideProductForm);
+  document.getElementById('addProductForm').addEventListener('submit', handleFormSubmit);
+
+  fetchProducts();
+});
+
+// Delegated event listener for Edit and Delete buttons
+document.getElementById('productList').addEventListener('click', (event) => {
+  if (event.target.classList.contains('edit-btn')) {
+      const productId = event.target.dataset.id;
+      editProduct(productId);
+  } else if (event.target.classList.contains('delete-btn')) {
+      const productId = event.target.dataset.id;
+      deleteProduct(productId);
+  }
+});
+
+// Fetch and display products for the current seller
+async function fetchProducts() {
+  const res = await fetch('http://localhost:3000/products');
+  const products = await res.json();
+  const productList = document.getElementById('productList');
+  productList.innerHTML = '';
+
+  const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+  const sellerProducts = products.filter(product => product.sellerId == currentUser.id);
+
+  sellerProducts.forEach(product => {
       const li = document.createElement('li');
       li.classList.add('product-item');
       li.innerHTML = `
-        <span>${product.name} - $${product.price}  <img style="width:70px;" src="../${product.image}"></span>
-        <div>
-          <button onclick="editProduct(${product.id})">Edit</button>
-          <button onclick="deleteProduct(${product.id})">Delete</button>
-        </div>
+          <span>${product.name} - $${product.price}  
+              <img style="width:90px;margin-left:20px" src="${product.image}">
+          </span>
+          <div>
+              <button class="edit-btn" data-id="${product.id}">Edit</button>
+              <button class="delete-btn" data-id="${product.id}">Delete</button>
+          </div>
       `;
       productList.appendChild(li);
-    });
-  }
-  
-  // Show product form
-  function showProductForm() {
-    document.getElementById('productForm').classList.remove('hidden');
-    document.getElementById('formTitle').textContent = 'Add Product';
-    document.getElementById('addProductForm').reset();
-  }
-  
-  // Hide product form
-  function hideProductForm() {
-    document.getElementById('productForm').classList.add('hidden');
-  }
-  
-  // Add new product
-  async function addProduct(event) {
-    event.preventDefault();
-    
-    const productName = document.getElementById('productName').value;
-    const productPrice = document.getElementById('productPrice').value;
-    const productCategory = document.getElementById('productCategory').value;
-    const productImage = document.getElementById('productImage').files[0];
-    
-    if (!productImage) {
-      alert("Please upload an image.");
+  });
+}
+
+
+function showProductForm() {
+  document.getElementById('productForm').classList.remove('hidden');
+  document.getElementById('formTitle').textContent = 'Add Product';
+  document.getElementById('addProductForm').reset();
+}
+
+function hideProductForm() {
+  document.getElementById('productForm').classList.add('hidden');
+}
+
+async function addProduct(event) {
+  event.preventDefault();
+
+  const name = document.getElementById('productName').value;
+  const price = document.getElementById('productPrice').value;
+  const category = document.getElementById('productCategory').value;
+  const image = document.getElementById('imageLink').value;
+  const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+
+  if (!image) {
+      alert("Please provide an image link.");
       return;
-    }
-  
-    const formData = new FormData();
-    formData.append('name', productName);
-    formData.append('price', productPrice);
-    formData.append('category', productCategory);
-    formData.append('image', productImage);
-  
-    // Send the new product to the server
-    const res = await fetch('http://localhost:3000/products', {
+  }
+
+  const newProduct = {
+      name,
+      price,
+      category,
+      image,
+      sellerId: currentUser.id
+  };
+
+  const res = await fetch('http://localhost:3000/products', {
       method: 'POST',
-      body: formData
-    });
-  
-    if (res.ok) {
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newProduct)
+  });
+
+  if (res.ok) {
       alert('Product added successfully');
       hideProductForm();
       fetchProducts();
-    } else {
+  } else {
       alert('Failed to add product');
-    }
   }
-  
-  // Edit product
-  async function editProduct(id) {
-    // Get product details and pre-fill the form for editing
+}
+
+let isEditing = false;  // Flag to track form mode
+let editingProductId = null;  // Track product being edited
+
+async function editProduct(id) {
     const res = await fetch(`http://localhost:3000/products/${id}`);
     const product = await res.json();
     showProductForm();
-  
+
+    isEditing = true;  // Set flag to editing mode
+    editingProductId = id;
+
     document.getElementById('formTitle').textContent = 'Edit Product';
     document.getElementById('productName').value = product.name;
     document.getElementById('productPrice').value = product.price;
     document.getElementById('productCategory').value = product.category;
-  
-    document.getElementById('addProductForm').onsubmit = async (event) => {
-      event.preventDefault();
-      const updatedProduct = {
+    document.getElementById('imageLink').value = product.image;
+}
+
+async function updateProduct(id) {
+    const updatedProduct = {
         name: document.getElementById('productName').value,
         price: document.getElementById('productPrice').value,
         category: document.getElementById('productCategory').value,
-      };
-  
-      const res = await fetch(`http://localhost:3000/products/${id}`, {
+        image: document.getElementById('imageLink').value,
+        sellerId: JSON.parse(sessionStorage.getItem('currentUser')).id
+    };
+
+    const res = await fetch(`http://localhost:3000/products/${id}`, {
         method: 'PUT',
-        body: JSON.stringify(updatedProduct),
         headers: { 'Content-Type': 'application/json' },
-      });
-  
-      if (res.ok) {
+        body: JSON.stringify(updatedProduct)
+    });
+
+    if (res.ok) {
         alert('Product updated successfully');
         hideProductForm();
         fetchProducts();
-      } else {
+    } else {
         alert('Failed to update product');
-      }
-    };
-  }
-  
-  // Delete product
-  async function deleteProduct(id) {
-    if (confirm('Are you sure you want to delete this product?')) {
-      const res = await fetch(`http://localhost:3000/products/${id}`, { method: 'DELETE' });
-  
-      if (res.ok) {
-        alert('Product deleted successfully');
-        fetchProducts();
-      } else {
-        alert('Failed to delete product');
-      }
     }
+}
+
+function handleFormSubmit(event) {
+    event.preventDefault();
+
+    if (isEditing) {
+        updateProduct(editingProductId);  // Update if editing
+        isEditing = false;
+        editingProductId = null;
+    } else {
+        addProduct(event);  // Add if not editing
+    }
+}
+
+
+async function deleteProduct(id) {
+  if (confirm('Are you sure you want to delete this product?')) {
+      const res = await fetch(`http://localhost:3000/products/${id}`, { method: 'DELETE' });
+      if (res.ok) {
+          alert('Product deleted successfully');
+          fetchProducts();
+      } else {
+          alert('Failed to delete product');
+      }
   }
-  
+}
+document.getElementById('addProductForm').addEventListener('submit', handleFormSubmit);

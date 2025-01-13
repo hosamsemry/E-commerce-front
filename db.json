@@ -51,28 +51,26 @@
   ],
   "products": [
     {
-      "id": "1",
-      "name": "Laptop",
-      "price": 800,
-      "category": "Electronics",
-      "sellerId": 2,
-      "image": "https://i.pcmag.com/imagery/roundups/02wkkhUM4TbL4UyW7EfdF0E-60.fit_lim.size_1050x.jpg"
+      "name": "office chair",
+      "price": "50",
+      "category": "Home Appliances",
+      "image": "https://bosq.in/wp-content/uploads/2023/10/AYX-202-2-1.webp",
+      "id": "1"
     },
     {
-      "id": "2",
       "name": "Shoes",
-      "price": 50,
+      "price": "42",
       "category": "Fashion",
-      "sellerId": 2,
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3zNmNSpi0p8B8afXLc3hZ-DCe_STgV817_A&s"
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3zNmNSpi0p8B8afXLc3hZ-DCe_STgV817_A&s",
+      "id": "2"
     },
     {
-      "id": "3",
       "name": "Mobile",
-      "price": 15000,
+      "price": "12000",
       "category": "Electronics",
-      "sellerId": 2,
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqvN_qq1cL0FdvEoSH79Eq8tpT34YM28ak-w&s"
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqvN_qq1cL0FdvEoSH79Eq8tpT34YM28ak-w&s",
+      "sellerId": "2",
+      "id": "3"
     },
     {
       "id": "4",
@@ -117,17 +115,34 @@
     {
       "id": "9",
       "name": "Book",
-      "price": 15,
+      "price": "20",
       "category": "Books",
-      "sellerId": 2,
+      "sellerId": 6,
       "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJk3FQF_wznbvEZzNDPTnUTqRk2m_XGiwUDQ&s"
     },
     {
-      "id": "b34e",
       "name": "ring",
-      "price": "50",
+      "price": "51",
       "category": "Fashion",
-      "image": "https://www.nicols.es/66762-large_default/grace-diamond-ring-white-gold.jpg"
+      "image": "https://www.miadonna.com/cdn/shop/products/Idyllic-Wedding-ring-set-Webwhite-001_1024x1024.jpg?v=1635379974",
+      "sellerId": "2",
+      "id": "f45a"
+    },
+    {
+      "name": "office chair",
+      "price": "60",
+      "category": "Home Appliances",
+      "image": "https://images.globalindustrial.com/images/pdp/277436a.webp?t=1690198812370",
+      "sellerId": "2",
+      "id": "0be9"
+    },
+    {
+      "id": "3959",
+      "name": "monitor",
+      "price": "120",
+      "category": "Electronics",
+      "image": "https://goldentech.com.sa/media/catalog/product/cache/3b63c6023d7836f7abeed5960b50eab1/d/e/dell_s2421hn_24_computer_monitor_0.jpg",
+      "sellerId": "2"
     }
   ],
   "orders": [

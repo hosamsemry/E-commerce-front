@@ -3,7 +3,7 @@ const addProductForm = document.getElementById('addProductForm');
 
 addProductForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-
+    
     const name = document.getElementById('name').value;
     const price = document.getElementById('price').value;
     const category = document.getElementById('category').value;
