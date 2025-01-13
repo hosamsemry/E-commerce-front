@@ -56,7 +56,7 @@
       "price": 800,
       "category": "Electronics",
       "sellerId": 2,
-      "image": "images/laptop.jpg"
+      "image": "https://i.pcmag.com/imagery/roundups/02wkkhUM4TbL4UyW7EfdF0E-60.fit_lim.size_1050x.jpg"
     },
     {
       "id": "2",
@@ -64,7 +64,7 @@
       "price": 50,
       "category": "Fashion",
       "sellerId": 2,
-      "image": "images/shoes.jpg"
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3zNmNSpi0p8B8afXLc3hZ-DCe_STgV817_A&s"
     },
     {
       "id": "3",
@@ -72,7 +72,7 @@
       "price": 15000,
       "category": "Electronics",
       "sellerId": 2,
-      "image": "images/mobile.jpg"
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqvN_qq1cL0FdvEoSH79Eq8tpT34YM28ak-w&s"
     },
     {
       "id": "4",
@@ -80,7 +80,7 @@
       "price": 150,
       "category": "Electronics",
       "sellerId": 6,
-      "image": "images/headphones.jpg"
+      "image": "https://cdn.thewirecutter.com/wp-content/media/2023/07/bluetoothheadphones-2048px-0876.jpg"
     },
     {
       "id": "5",
@@ -88,7 +88,7 @@
       "price": 20,
       "category": "Fashion",
       "sellerId": 6,
-      "image": "images/shirt.jpg"
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnCzUDMXD4c9ij1eb-aWyZIc8iwJrE3GGFvw&s"
     },
     {
       "id": "6",
@@ -96,7 +96,7 @@
       "price": 250,
       "category": "Electronics",
       "sellerId": 6,
-      "image": "images/smart-watch.jpg"
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6XDsy0F5uBjoNWO9HoxGWUNAYgR3xIFsMfw&s"
     },
     {
       "id": "7",
@@ -104,7 +104,7 @@
       "price": 100,
       "category": "Home Appliances",
       "sellerId": 6,
-      "image": "images/blender.png"
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcHnDTzFqPaLe5bxYI-E4_-6QEF84aYmGC7w&s"
     },
     {
       "id": "8",
@@ -112,7 +112,7 @@
       "price": 300,
       "category": "Home Appliances",
       "sellerId": 6,
-      "image": "images/microwave.jpg"
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZ7UL704fDPgpRc-zZfjSMnatpxZieJgSZ8Q&s"
     },
     {
       "id": "9",
@@ -120,7 +120,7 @@
       "price": 15,
       "category": "Books",
       "sellerId": 2,
-      "image": "images/book.jpg"
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJk3FQF_wznbvEZzNDPTnUTqRk2m_XGiwUDQ&s"
     },
     {
       "id": "b34e",

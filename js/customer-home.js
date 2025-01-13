@@ -26,7 +26,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
                 productCard.innerHTML = `
                     
-                        <img src="../${product.image}" alt="${product.name}" class="product-image">
+                        <img src="${product.image}" alt="${product.name}" class="product-image">
                         <h3>${product.name}</h3>
                         <p>Category: ${product.category}</p>
                         <p>Price: $${product.price}</p>
@@ -71,8 +71,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     const productItem = document.createElement("li");
                     productItem.innerHTML = `
                         
-                            <img src="../${product.image}" alt="${product.name}">
-                            <strong>${product.name}</strong>
+                            <img src="${product.image}" alt="${product.name}">
+                            <div class="product-name-category">${product.name}</div>
                             <span class="price">$${product.price}</span> 
                             <button class="add-to-cart-btn">Add to Cart</button>
                         
@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // Populate the product details
             productDetailContainer.innerHTML = `
                 <div class="product-detail">
-                    <img src="../${product.image}" alt="${product.name}" class="product-image">
+                    <img src="${product.image}" alt="${product.name}" class="product-image">
                     <h1>${product.name}</h1>
                     <p><strong>Category:</strong> ${product.category}</p>
                     <p><strong>Price:</strong> $${product.price}</p>
