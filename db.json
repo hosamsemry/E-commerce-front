@@ -79,7 +79,7 @@
       "name": "Headphones",
       "price": 150,
       "category": "Electronics",
-      "sellerId": 5,
+      "sellerId": 6,
       "image": "images/headphones.jpg"
     },
     {
@@ -103,7 +103,7 @@
       "name": "Blender",
       "price": 100,
       "category": "Home Appliances",
-      "sellerId": 5,
+      "sellerId": 6,
       "image": "images/blender.png"
     },
     {
@@ -111,7 +111,7 @@
       "name": "Microwave",
       "price": 300,
       "category": "Home Appliances",
-      "sellerId": 12,
+      "sellerId": 6,
       "image": "images/microwave.jpg"
     },
     {
@@ -119,8 +119,15 @@
       "name": "Book",
       "price": 15,
       "category": "Books",
-      "sellerId": 13,
+      "sellerId": 2,
       "image": "images/book.jpg"
+    },
+    {
+      "id": "b34e",
+      "name": "ring",
+      "price": "50",
+      "category": "Fashion",
+      "image": "https://www.nicols.es/66762-large_default/grace-diamond-ring-white-gold.jpg"
     }
   ],
   "orders": [

@@ -25,12 +25,12 @@ window.addEventListener('DOMContentLoaded', () => {
                 productCard.classList.add('product-card');
 
                 productCard.innerHTML = `
-                    <a href="product-detail.html?id=${product.id}">
+                    
                         <img src="../${product.image}" alt="${product.name}" class="product-image">
                         <h3>${product.name}</h3>
                         <p>Category: ${product.category}</p>
                         <p>Price: $${product.price}</p>
-                    </a>
+                    
                     <button class="add-to-cart-btn">Add to Cart</button>
                 `;
 
@@ -70,12 +70,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 groupedProducts[category].forEach((product) => {
                     const productItem = document.createElement("li");
                     productItem.innerHTML = `
-                        <a href="product-detail.html?id=${product.id}">
+                        
                             <img src="../${product.image}" alt="${product.name}">
                             <strong>${product.name}</strong>
                             <span class="price">$${product.price}</span> 
                             <button class="add-to-cart-btn">Add to Cart</button>
-                        </a>
+                        
                     `;
                     productList.appendChild(productItem);
                 });

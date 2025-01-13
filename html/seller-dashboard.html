@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seller Dashboard</title>
+  <link rel="stylesheet" href="../css/seller-dashboard.css">
+</head>
+<body>
+    <header>
+        <h1>Seller Dashboard</h1>
+        <nav style="width: 35%;margin: 0 auto;">
+            <ul>
+                <li><a href="../index.html" >Home</a></li>
+                
+            </ul>
+        </nav>
+    </header>
+
+
+  <div class="dashboard">
+    <h1>Seller Dashboard</h1>
+    <button id="addProductBtn">Add Product</button>
+
+    <div id="productList" class="product-list"></div>
+    
+    <!-- Add/Edit Product Form -->
+    <div id="productForm" class="product-form hidden">
+      <h2 id="formTitle">Add Product</h2>
+      <form id="addProductForm">
+        <input type="text" id="productName" placeholder="Product Name" required>
+        <input type="number" id="productPrice" placeholder="Price" required>
+        <input type="text" id="productCategory" placeholder="Category" required>
+        <input type="file" id="productImage" required>
+        <button type="submit">Save</button>
+      </form>
+      <button id="cancelBtn">Cancel</button>
+    </div>
+  </div>
+
+  <script src="../js/seller-dashboard.js"></script>
+</body>
+</html>
