@@ -121,12 +121,6 @@
       "category": "Books",
       "sellerId": 13,
       "image": "images/book.jpg"
-    },
-    {
-      "id": "9d9e",
-      "name": "monitor",
-      "price": "250",
-      "category": "Electronics"
     }
   ],
   "orders": [

@@ -1,8 +1,8 @@
 window.addEventListener('load', () => {
   const loginBtn = document.getElementById('login-btn');
 
-  loginBtn.addEventListener('click', function () {
-
+  loginBtn.addEventListener('click', function (event) {
+    event.preventDefault();
     // Get form data
     const username = document.getElementById('login-username').value;
     const password = document.getElementById('login-password').value;
@@ -13,43 +13,41 @@ window.addEventListener('load', () => {
       return;
     }
 
-  // Fetch data from db.json
-  fetch('http://localhost:3000/users')
-    .then(response => response.json())
-    .then(users => {
-      try {
-        const user = users.find(user => user.username.toLowerCase() === username.toLowerCase() &&
-          user.password === password);
+    // Fetch data from db.json
+    fetch('http://localhost:3000/users')
+      .then(response => response.json())
+      .then(users => {
+        try {
+          const user = users.find(user => user.username.toLowerCase() === username.toLowerCase() &&
+            user.password === password);
 
-        if (user) {
-          localStorage.setItem('currentUser', JSON.stringify(user));
+          if (user) {
+            sessionStorage.setItem('currentUser', JSON.stringify(user));
 
-          switch (user.role) {
-            case 'admin':
-              window.location.href = './admin-dashboard.html';
-              break;
-            case 'seller':
-              window.location.href = './seller-dashboard.html';
-              break;
-            case 'customer':
-              window.location.href = './home.html';
-              break;
-            default:
-              alert('Role not recognized');
+            switch (user.role) {
+              case 'admin':
+                window.location.href = './admin-dashboard.html';
+                break;
+              case 'seller':
+                window.location.href = './seller-dashboard.html';
+                break;
+              case 'customer':
+                window.location.href = './home.html';
+                break;
+              default:
+                alert('Role not recognized');
+            }
+          } else {
+            alert('Invalid username or password');
           }
-        } else {
-          alert('Invalid username or password');
+        } catch (error) {
+          console.error('Error processing data:', error);
+          alert('An error occurred while logging in. Please try again later.');
         }
-      } catch (error) {
-        console.error('Error processing data:', error);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
         alert('An error occurred while logging in. Please try again later.');
-      }
-    })
-    .catch(error => {
-      console.error('Error fetching data:', error);
-      alert('An error occurred while logging in. Please try again later.');
-    });
-    });
+      });
   });
-  
-
+});
