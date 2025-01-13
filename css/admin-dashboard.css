@@ -30,6 +30,8 @@ header h1 {
     margin-bottom: 10px;
 }
 
+
+
 header nav ul {
     display: inline-block;
     
@@ -47,7 +49,7 @@ header nav ul li {
 
 header nav ul li a {
     text-decoration: none;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     font-weight: bold;
     padding: 0.5rem 1rem;
     transition: background-color 0.3s ease;
@@ -69,7 +71,7 @@ main {
     width: 70%;
     
     background: #fff;
-    padding: 1.5rem;
+    padding: 30px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     margin-bottom: 2rem;
@@ -77,6 +79,55 @@ main {
 .section h2 {
     margin-bottom: 20px;
     text-align: center;
+}
+
+.section ul {
+    margin-left: 2px;
+}
+
+.add-user-link {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.add-user-link:hover {
+    background-color: #45a049;
+}
+
+.add-product-link {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.add-product-link:hover {
+    background-color: #45a049;
+}
+
+.add-order-link {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.add-order-link:hover {
+    background-color: #45a049;
 }
 
 .section form {
@@ -144,4 +195,17 @@ ul li {
     padding: 0.5rem 1rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
+}
+
+.order-list-admin {
+    padding-bottom: 20px;
+    line-height: 1.5;
+    height: 90px;
+}
+
+.admin-role-option{
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 5px;
+    background-color: #d5d5d5;
 }

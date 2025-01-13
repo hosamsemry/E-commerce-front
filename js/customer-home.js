@@ -1,4 +1,8 @@
 window.addEventListener('DOMContentLoaded', () => {
+
+    
+
+
     const productsContainer = document.getElementById('products-container');
 
     // Fetch products from db.json

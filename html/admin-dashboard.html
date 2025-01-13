@@ -1,61 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="../css/admin-dashboard.css">
-</head>
-<body>
-    <header>
-        <h1>Admin Dashboard</h1>
-        <nav>
-            <ul>
-                <li><a href="../index.html" >home</a></li>
-                <li><a href="#" onclick="showSection('users')">Users</a></li>
-                <li><a href="#" onclick="showSection('products')">Products</a></li>
-                <li><a href="#" onclick="showSection('orders')">Orders</a></li>
-            </ul>
-        </nav>
-    </header>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Admin Dashboard</title>
+        <link rel="stylesheet" href="../css/admin-dashboard.css">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <main>
-        <!-- User Management Section -->
-        <section id="users" class="section">
-            <h2>Manage Users</h2>
-            <form id="addUserForm">
-                <input type="text" id="username" placeholder="Username" required>
-                <input type="password" id="password" placeholder="Password" required>
-                <button type="submit">Add User</button>
-            </form>
-            <h3>User List</h3>
-            <ul id="userList"></ul>
-        </section>
+    </head>
+    <body>
+        <header>
+            <h1>Admin Dashboard</h1>
+            <nav style="width: 35%;margin: 0 auto;">
+                <ul>
+                    <li><a href="../index.html" >Home</a></li>
+                    <li><a href="#" onclick="showSection('users')">Users</a></li>
+                    <li><a href="#" onclick="showSection('products')">Products</a></li>
+                    <li><a href="#" onclick="showSection('orders')">Orders</a></li>
+                </ul>
+            </nav>
+        </header>
 
-        <!-- Product Management Section -->
-        <section id="products" class="section hidden">
-            <h2>Manage Products</h2>
-            <form id="addProductForm">
-                <input type="text" id="productName" placeholder="Product Name" required>
-                <input type="number" id="productPrice" placeholder="Price" required>
-                <button type="submit" >Add Product</button>
-            </form>
-            <h3>Product List</h3>
-            <ul id="productList"></ul>
-        </section>
+        <main>
+            <!-- User Management Section -->
+            <section id="users" class="section">
+                <h2>Manage Users</h2>
+                <a href="add-user.html" class="add-user-link">Add New User</a>
+                <h3>User List</h3>
+                <ul id="userList"></ul>
+            </section>
 
-        <!-- Orders Management Section -->
-        <section id="orders" class="section hidden">
-            <h2>Manage Orders</h2>
-            <form id="addOrderForm">
-                <input type="text" id="orderName" placeholder="Product Name" required>
-                <input type="number" id="orderPrice" placeholder="Price" required>
-                <button type="submit" >Add Order</button>
-            <h3>Order List</h3>
-            <ul id="orderList"></ul>
-        </section>
-    </main>
+            <!-- Product Management Section -->
+            <section id="products" class="section hidden">
+                <h2>Manage Products</h2>
+                <a href="add-product.html" class="add-product-link">Add New Product</a>
+                <h3>Product List</h3>
+                <ul id="productList"></ul>
+            </section>
 
-    <script src="../js/admin-dashboard.js"></script>
-</body>
-</html>
+            <!-- Orders Management Section -->
+            <section id="orders" class="section hidden">
+                <h2>Manage Orders</h2>
+                <a href="add-order.html" class="add-order-link">Add New Order</a>
+                <h3>Order List</h3>
+                <ul id="orderList"></ul>
+            </section>
+        </main>
+
+        <script src="../js/admin-dashboard.js"></script>
+    </body>
+    </html>

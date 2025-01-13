@@ -21,15 +21,17 @@ async function fetchUsers() {
     userList.innerHTML = '';
     users.forEach(user => {
         const li = document.createElement('li');
-        li.textContent = `${user.username}`;
-        const deleteBtn = document.createElement('button');
-        deleteBtn.classList.add('delete-btn');
-        deleteBtn.textContent = 'Delete';
-        deleteBtn.onclick = () => deleteUser(user.id);
-        li.appendChild(deleteBtn);
+        li.innerHTML = `
+            <div class="user-info">
+                <strong><a href="user-details.html?id=${user.id}" target="_blank">${user.username}</a></strong>
+                <span style="margin-left:20px;"><em>${user.role}</em></span>
+            </div>
+            <button class="delete-btn" onclick="deleteUser(${user.id})">Delete</button>
+        `;
         userList.appendChild(li);
     });
 }
+
 
 // Fetch and display products
 async function fetchProducts() {
@@ -55,62 +57,117 @@ async function fetchOrders() {
     orderList.innerHTML = '';
     orders.forEach(order => {
         const li = document.createElement('li');
-        li.textContent = `Order #${order.id} - ${order.status}`;
+        li.innerHTML = `
+            <strong>Order-number: ${order.id}</strong><br>
+            CustomerId: ${order.customerId}<br>
+            Total: $${order.total}<br>
+            Status: ${order.status}<br>
+            
+            
+        `;
+        li.classList.add("order-list-admin")
         const deleteBtn = document.createElement('button');
         deleteBtn.classList.add('delete-btn');
         deleteBtn.textContent = 'Delete';
-        deleteBtn.onclick = () => deleteProduct(product.id);
+        deleteBtn.onclick = () => deleteOrder(order.id);
         li.appendChild(deleteBtn);
-        productList.appendChild(li);
         orderList.appendChild(li);
     });
 }
 
 // Add user
-addUserForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const username = document.getElementById('username').value;
+// Add user with role
+// addUserForm.addEventListener('submit', async (e) => {
+//     e.preventDefault();
+//     const username = document.getElementById('username').value;
+//     const password = document.getElementById('password').value; // Assuming password handling is needed
+//     const role = document.getElementById('role').value;
 
-    await fetch(API_URL_USERS, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username })
-    });
+//     await fetch(API_URL_USERS, {
+//         method: 'POST',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify({ username, password, role }),
+//     });
 
-    addUserForm.reset();
-    fetchUsers();
-});
+//     addUserForm.reset();
+//     fetchUsers();
+// });
+
 
 // Add product
-addProductForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const name = document.getElementById('productName').value;
-    const price = document.getElementById('productPrice').value;
+// addProductForm.addEventListener('submit', async (e) => {
+//     e.preventDefault();
+//     const name = document.getElementById('productName').value;
+//     const price = document.getElementById('productPrice').value;
 
-    await fetch(API_URL_PRODUCTS, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, price })
-    });
+//     await fetch(API_URL_PRODUCTS, {
+//         method: 'POST',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify({ name, price })
+//     });
 
-    addProductForm.reset();
-    fetchProducts();
-});
+//     addProductForm.reset();
+//     fetchProducts();
+// });
 
 // Delete functions
+// Delete User with confirmation
 async function deleteUser(id) {
-    await fetch(`${API_URL_USERS}/${id}`, { method: 'DELETE' });
-    fetchUsers();
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Yes, delete it!"
+    }).then(async (result) => {
+        if (result.isConfirmed) {
+            await fetch(`${API_URL_USERS}/${id}`, { method: 'DELETE' });
+            fetchUsers(); // Refresh user list
+            Swal.fire("Deleted!", "User has been deleted.", "success");
+        }
+    });
 }
 
+// Delete Product with confirmation
 async function deleteProduct(id) {
-    await fetch(`${API_URL_PRODUCTS}/${id}`, { method: 'DELETE' });
-    fetchProducts();
+    Swal.fire({
+        title: "Are you sure?",
+        text: "This product will be permanently deleted!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Yes, delete it!"
+    }).then(async (result) => {
+        if (result.isConfirmed) {
+            await fetch(`${API_URL_PRODUCTS}/${id}`, { method: 'DELETE' });
+            fetchProducts(); // Refresh product list
+            Swal.fire("Deleted!", "Product has been deleted.", "success");
+        }
+    });
 }
+
+// Delete Order with confirmation
 async function deleteOrder(id) {
-    await fetch(`${API_URL_ORDERS}/${id}`, { method: 'DELETE' });
-    fetchOrders();
+    Swal.fire({
+        title: "Are you sure?",
+        text: "This order will be permanently deleted!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Yes, delete it!"
+    }).then(async (result) => {
+        if (result.isConfirmed) {
+            await fetch(`${API_URL_ORDERS}/${id}`, { method: 'DELETE' });
+            fetchOrders(); // Refresh order list
+            Swal.fire("Deleted!", "Order has been deleted.", "success");
+        }
+    });
 }
+
 
 // Initialize
 fetchUsers();

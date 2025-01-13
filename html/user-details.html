@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit User</title>
+    <link rel="stylesheet" href="../css/admin-dashboard.css">
+    <link rel="stylesheet" href="../css/user-details.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+<body>
+    <header>
+        <h1>Edit User</h1>
+        <nav>
+            <a href="admin-dashboard.html">Back to Dashboard</a>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <form id="editUserForm">
+                <input type="text" id="editUsername" placeholder="Username" required>
+                <input type="password" id="editPassword" placeholder="Password" required>
+                <select id="editRole" required>
+                    <option value="customer">Customer</option>
+                    <option value="seller">Seller</option>
+                    <option value="admin">Admin</option>
+                </select>
+
+                <div class="form-actions">
+                <button type="submit" class="submit">Update User</button>
+                <button type="button" id="deleteUserBtn" class="delete">Delete User</button>
+                </div> 
+
+            </form>
+        </section>
+    </main>
+
+    <script src="../js/user-details.js"></script>
+</body>
+</html>

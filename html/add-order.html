@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Order</title>
+    <link rel="stylesheet" href="../css/admin-dashboard.css">
+    <link rel="stylesheet" href="../css/add-order.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <header>
+        <h1>Add New Order</h1>
+        <nav>
+            <a href="admin-dashboard.html">Back to Dashboard</a>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+        <form id="addOrderForm">
+            <label for="customerId">Customer ID:</label>
+            <input type="number" id="customerId" name="customerId" required><br><br>
+
+            <label for="productId">Product ID:</label>
+            <input type="number" id="productId" name="productId" required><br><br>
+
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" required><br><br>
+
+            <label for="total">Total Price:</label>
+            <input type="number" id="total" name="total" required readonly><br><br>
+
+            <label for="status">Order Status:</label>
+            <select id="status" name="status" required>
+                <option value="pending">Pending</option>
+                <option value="shipped">Shipped</option>
+                <option value="delivered">Delivered</option>
+            </select><br><br>
+
+            <button type="submit">Add Order</button>
+        </form>
+        </section>
+    </main>
+
+    <script src="../js/add-order.js"></script>
+</body>
+</html>

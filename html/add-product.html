@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Product</title>
+    <link rel="stylesheet" href="../css/admin-dashboard.css">
+    <link rel="stylesheet" href="../css/add-product.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+<body>
+    <header>
+        <h1>Add New Product</h1>
+        <nav>
+            <a href="admin-dashboard.html">Back to Dashboard</a>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <form id="addProductForm">
+                <input type="text" id="name" placeholder="name" required>
+                <input type="text" id="price" placeholder="Price" required>
+                <input type="text" id="seller-id" placeholder="seller id" required>
+                <select id="category" required>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Fashion">Fashion</option>
+                    <option value="Home Appliances">Home Appliances</option>
+                    <option value="Books">Books</option>
+                </select>
+                <input type="file" id="productImage" accept="image/*" required>
+                <button type="submit">Add product</button>
+            </form>
+        
+        </section>
+    </main>
+
+    <script src="../js/add-product.js"></script>
+</body>
+</html>
