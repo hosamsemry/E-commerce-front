@@ -37,11 +37,11 @@ header nav ul {
     
     list-style: none;
     padding: 0;
-    text-align: left;
+    text-align: center;
 }
 
 header nav ul li {
-    margin: 0 15px;
+    margin: 0 10px;
     border: none;
     display: inline-block;
     
