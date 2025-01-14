@@ -40,9 +40,8 @@ header {
 
 #register-form h2 {
   text-align: center;
-  color: #ffffff;
+  color: #FF7043;
   font-size: 32px;
-  background-color: #FF7043;  /* Using the same orange color as header */
   padding: 10px;
   border-radius: 5px;
   margin-bottom: 20px;
