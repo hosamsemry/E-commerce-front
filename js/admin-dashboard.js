@@ -1,11 +1,10 @@
 window.addEventListener('load', () => {
-    // Get the current user from sessionStorage
+   
     const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
 
-    // Check if the user exists and has the 'admin' role
     if (!currentUser || currentUser.role !== 'admin') {
-      // If the user is not an admin, redirect to the home page or login page
-      window.location.href = './home.html'; // or './login.html'
+      
+      window.location.href = './home.html'; 
     }
   });
 
