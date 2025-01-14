@@ -14,7 +14,12 @@ addUserForm.addEventListener('submit', async (e) => {
         body: JSON.stringify({ username, password, role })
     });
 
-    alert('User added successfully!');
+    Swal.fire({
+        icon: 'success',
+        title: 'User added successfully!',
+        showConfirmButton: false,
+        timer: 1500
+    });
     addUserForm.reset();
     window.location.href = 'admin-dashboard.html';  // Redirect back to the dashboard
 });

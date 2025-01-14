@@ -10,7 +10,11 @@ window.addEventListener('load', () => {
         const role = document.getElementById('reg-role').value;
 
         if (!username || !password || !role) {
-            alert('Please fill in all fields.');
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Please fill in all fields.'
+            });
             return;
         }
         
@@ -20,7 +24,11 @@ window.addEventListener('load', () => {
                 const usernameExists = users.some(user => user.username.toLowerCase() === username.toLowerCase());
 
                 if (usernameExists) {
-                    alert('Username already exists. Please choose a different username.');
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Username already exists. Please choose a different username.'
+                    });
                 } else {
                     // New user object
                     const newUser = {

@@ -34,7 +34,12 @@ editUserForm.addEventListener('submit', async (e) => {
         body: JSON.stringify(updatedUser)
     });
 
-    alert('User updated successfully!');
+    Swal.fire({
+        title: 'Success!',
+        text: 'User updated successfully!',
+        icon: 'success',
+        confirmButtonText: 'OK'
+    });
     window.location.href = 'admin-dashboard.html';
 });
 

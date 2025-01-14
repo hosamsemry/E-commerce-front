@@ -70,7 +70,11 @@ async function addProduct(event) {
   const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
 
   if (!image) {
-      alert("Please provide an image link.");
+    Swal.fire({
+        icon: 'warning',
+        title: 'Missing Image',
+        text: 'Please provide an image link.'
+    });
       return;
   }
 
@@ -88,13 +92,23 @@ async function addProduct(event) {
       body: JSON.stringify(newProduct)
   });
 
-  if (res.ok) {
-      alert('Product added successfully');
-      hideProductForm();
-      fetchProducts();
-  } else {
-      alert('Failed to add product');
-  }
+if (res.ok) {
+        Swal.fire({
+                icon: 'success',
+                title: 'Product added successfully',
+                showConfirmButton: false,
+                timer: 1500
+        });
+        hideProductForm();
+        fetchProducts();
+} else {
+        Swal.fire({
+                icon: 'error',
+                title: 'Failed to add product',
+                showConfirmButton: false,
+                timer: 1500
+        });
+}
 }
 
 let isEditing = false;  // Flag to track form mode
@@ -131,11 +145,21 @@ async function updateProduct(id) {
     });
 
     if (res.ok) {
-        alert('Product updated successfully');
+        Swal.fire({
+            icon: 'success',
+            title: 'Product updated successfully',
+            showConfirmButton: false,
+            timer: 1500
+        });
         hideProductForm();
         fetchProducts();
     } else {
-        alert('Failed to update product');
+        Swal.fire({
+            icon: 'error',
+            title: 'Failed to update product',
+            showConfirmButton: false,
+            timer: 1500
+        });
     }
 }
 
@@ -155,12 +179,22 @@ function handleFormSubmit(event) {
 async function deleteProduct(id) {
   if (confirm('Are you sure you want to delete this product?')) {
       const res = await fetch(`http://localhost:3000/products/${id}`, { method: 'DELETE' });
-      if (res.ok) {
-          alert('Product deleted successfully');
-          fetchProducts();
-      } else {
-          alert('Failed to delete product');
-      }
+    if (res.ok) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Product deleted successfully',
+          showConfirmButton: false,
+          timer: 1500
+        });
+        fetchProducts();
+    } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Failed to delete product',
+          showConfirmButton: false,
+          timer: 1500
+        });
+    }
   }
 }
 document.getElementById('addProductForm').addEventListener('submit', handleFormSubmit);

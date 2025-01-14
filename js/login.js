@@ -9,7 +9,11 @@ window.addEventListener('load', () => {
 
     // Basic validation
     if (!username || !password) {
-      alert('Please enter both username and password');
+      Swal.fire({
+        icon: 'warning',
+        title: 'Missing Information',
+        text: 'Please enter both username and password',
+      });
       return;
     }
 
@@ -35,19 +39,35 @@ window.addEventListener('load', () => {
                 window.location.href = './home.html';
                 break;
               default:
-                alert('Role not recognized');
-            }
-          } else {
-            alert('Invalid username or password');
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'Role not recognized',
+                });
+              }
+              } else {
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Invalid username or password',
+              });
           }
         } catch (error) {
           console.error('Error processing data:', error);
-          alert('An error occurred while logging in. Please try again later.');
+            Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'An error occurred while logging in. Please try again later.',
+            });
         }
       })
       .catch(error => {
         console.error('Error fetching data:', error);
-        alert('An error occurred while logging in. Please try again later.');
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'An error occurred while logging in. Please try again later.',
+        });
       });
   });
 });
