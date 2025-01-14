@@ -17,7 +17,7 @@ body {
 
 /* Header */
 header {
-    background-color: #e4610a;
+    background-color: #d14d07;
     color: white;
     padding: 1rem;
     text-align: center;
@@ -176,18 +176,16 @@ ul {
     width: 100%;
 }
 
-ul li {
-    
-    margin: 0.5rem 0;
-    padding: 0.75rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+ ul li {
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin: 5px 0;
+ }
 
-.delete-btn {
+.btn {
     background-color: #e4610a;
     color: white;
     border: none;
@@ -195,7 +193,13 @@ ul li {
     padding: 0.5rem 1rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    width: 80px;
+    transition: .3s;
 }
+.btn:hover {
+    background-color: #d14d07;
+}
+
 
 .order-list-admin {
     padding-bottom: 20px;

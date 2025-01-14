@@ -33,11 +33,14 @@ async function fetchUsers() {
         const li = document.createElement('li');
         li.innerHTML = `
             <div class="user-info">
-                <strong><a href="user-details.html?id=${user.id}" target="_blank">${user.username}</a></strong>
+                <strong>${user.username}</strong>
                 <span style="margin-left:20px;"><em>${user.role}</em></span>
             </div>
-            <button class="delete-btn" onclick="deleteUser(${user.id})">Delete</button>
-        `;
+            <div class="btns">
+            <button class="btn""><a style="text-decoration:none; color:white;" href="user-details.html?id=${user.id}" target="_blank">Edit</a></button>
+            <button class="btn" onclick="deleteUser(${user.id})">Delete</button>
+            </div>
+            `;
         userList.appendChild(li);
     });
 }
