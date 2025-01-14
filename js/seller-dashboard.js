@@ -37,9 +37,12 @@ async function fetchProducts() {
       const li = document.createElement('li');
       li.classList.add('product-item');
       li.innerHTML = `
-          <span>${product.name} - $${product.price}  
-              <img style="width:90px;margin-left:20px" src="${product.image}">
-          </span>
+            <div class="product-li-seller">
+          <span><font style="font-weight:bold; font-size:20px;color:#d14d07;">Product Name:</font> ${product.name}</span>
+          <span><font style="font-weight:bold; font-size:20px;color:#d14d07;">Product Price:</font> $${product.price} </span> 
+            </div>  
+          
+          <img style="width:120px;margin-left:20px" src="${product.image}">
           <div>
               <button class="edit-btn" data-id="${product.id}">Edit</button>
               <button class="delete-btn" data-id="${product.id}">Delete</button>

@@ -14,11 +14,13 @@ body {
   }
 
   header h1 {
-    margin: 0 auto;
+    margin: 0;
+    text-align: center;
+    flex: 1;
+    margin-right: 500px;
   }
 
   header nav {
-    width: 5%;
     order: -1; /* This will move the nav to the left */
   }
 
@@ -30,7 +32,6 @@ body {
   }
 
   header nav ul li {
-    
     border: none;
     display: inline-block;
   }
@@ -69,18 +70,31 @@ body {
   .product-list {
     margin-top: 20px;
   }
-  
+
+  .product-li-seller {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .product-li-seller span {
+    margin-top: 15px;
+  }
+
   .product-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
+    padding: 15px;
     border: 1px solid #ddd;
     margin: 5px 0;
   }
   
   .product-item button {
-    background-color: red;
+    background-color: #e4610a;
+  }
+  .product-item button:hover {
+    background-color: #d14d07;
+
   }
   
   .hidden {
@@ -93,5 +107,9 @@ body {
     padding: 20px;
     border: 1px solid #ddd;
     background-color: #f9f9f9;
+  }
+
+  #cancelBtn{
+    background-color: #369bf4;
   }
   

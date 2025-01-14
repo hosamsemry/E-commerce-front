@@ -185,6 +185,18 @@ ul {
     margin: 5px 0;
  }
 
+ .product-li-admin,
+ .user-li-admin {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .user-li-admin span,
+  .product-li-admin span {
+    margin-top: 15px;
+    font-size: 18px;
+  }
+
 .btn {
     background-color: #e4610a;
     color: white;

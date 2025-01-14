@@ -32,9 +32,9 @@ async function fetchUsers() {
     users.forEach(user => {
         const li = document.createElement('li');
         li.innerHTML = `
-            <div class="user-info">
-                <strong>${user.username}</strong>
-                <span style="margin-left:20px;"><em>${user.role}</em></span>
+            <div class="user-li-admin">
+                <span><font style="font-weight:bold; font-size:20px;color:#d14d07;">User Name:</font> ${user.username}</span>
+          <span><font style="font-weight:bold; font-size:20px;color:#d14d07;">User Role:</font> ${user.role} </span> 
             </div>
             <div class="btns">
             <button class="btn""><a style="text-decoration:none; color:white;" href="user-details.html?id=${user.id}" target="_blank">Edit</a></button>
@@ -53,9 +53,14 @@ async function fetchProducts() {
     productList.innerHTML = '';
     products.forEach(product => {
         const li = document.createElement('li');
-        li.textContent = `${product.name} - $${product.price}`;
+        li.innerHTML = `<div class="product-li-admin">
+          <span><font style="font-weight:bold; font-size:20px;color:#d14d07;">Product Name:</font> ${product.name}</span>
+          <span><font style="font-weight:bold; font-size:20px;color:#d14d07;">Product Price:</font> $${product.price} </span> 
+            </div>
+            <img style="width:120px;margin-left:20px" src="${product.image}">`
+            ;
         const deleteBtn = document.createElement('button');
-        deleteBtn.classList.add('delete-btn');
+        deleteBtn.classList.add('btn');
         deleteBtn.textContent = 'Delete';
         deleteBtn.onclick = () => deleteProduct(product.id);
         li.appendChild(deleteBtn);
@@ -80,7 +85,7 @@ async function fetchOrders() {
         `;
         li.classList.add("order-list-admin")
         const deleteBtn = document.createElement('button');
-        deleteBtn.classList.add('delete-btn');
+        deleteBtn.classList.add('btn');
         deleteBtn.textContent = 'Delete';
         deleteBtn.onclick = () => deleteOrder(order.id);
         li.appendChild(deleteBtn);
