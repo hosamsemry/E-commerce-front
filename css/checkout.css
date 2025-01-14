@@ -1,0 +1,97 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #d14d07;
+    color: white;
+    padding: 10px;
+    padding-bottom: 5px;
+    text-align: left;
+    position: top;
+    top: 0;
+    
+}
+
+header nav ul {
+    display: inline-block;
+    list-style: none;
+    padding: 0;
+    text-align: left;
+}
+header nav ul li{
+    display: inline-block;
+    list-style: none;
+    
+    text-align: left;
+}
+
+header nav ul li a {
+    text-decoration: none;
+    padding: 8px;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+
+}
+
+header nav ul li a:hover {
+    background-color: #ab3c00;
+}
+
+h1 {
+    margin-left: 20px;
+    margin-top: 20px;
+}
+#cart-items{
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    border: 1px solid #828282;
+    padding: 15px;
+}
+
+.cart-item{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    border: 1px solid #adadad;
+    padding: 10px;
+}
+#total-price{
+    margin-left: 20px;
+    margin-top: 20px;
+    font-size: 20px;
+    color:green;
+}
+
+#checkout-button{
+    margin-left: 20px;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #e05b13;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.remove-button{
+    background-color: #e05b13;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100px;
+    padding: 5px;
+}

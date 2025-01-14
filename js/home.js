@@ -1,9 +1,24 @@
-window.addEventListener('DOMContentLoaded', () => {
+const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
 
+export const cart = {
+    customerId: currentUser.id,
+    products: [],
+    total: 0,
+    status: "pending"
+};
+
+window.addEventListener('DOMContentLoaded', () => {
     const productsContainer = document.getElementById('products-container');
+    const categoryGrid = document.getElementById('category-grid');
     const searchInput = document.getElementById('search');
     const searchButton = document.getElementById('search-button');
     const currentUser = sessionStorage.getItem('currentUser');
+    
+    // Check if the elements exist
+    if (!productsContainer || !categoryGrid) {
+        console.error('Missing container elements');
+        return;
+    }
 
     // Fetch products from db.json
     fetch('../db.json') // Adjust the path as needed
@@ -31,7 +46,7 @@ window.addEventListener('DOMContentLoaded', () => {
                         <h3>${product.name}</h3>
                         <p>Category: ${product.category}</p>
                         <p>Price: $${product.price}</p>
-                        ${currentUser ? '<button class="add-to-cart-btn">Add to Cart</button>' : ''}
+                        ${currentUser ? `<button class="add-to-cart-btn" data-id="${product.id}">Add to Cart</button>` : ''}
                     `;
 
                     productsContainer.appendChild(productCard);
@@ -68,13 +83,8 @@ window.addEventListener('DOMContentLoaded', () => {
             });
         })
         .catch(error => console.error("Error fetching products:", error));
-});
 
-document.addEventListener("DOMContentLoaded", () => {
-    const categoryGrid = document.getElementById("category-grid");
-    const currentUser = sessionStorage.getItem('currentUser');
-
-    // Fetch data from the JSON server
+    // Fetch data for categories
     fetch("http://localhost:3000/products")
         .then((response) => response.json())
         .then((products) => {
@@ -104,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         <img src="${product.image}" alt="${product.name}">
                         <div class="product-name-category">${product.name}</div>
                         <span class="price">$${product.price}</span> 
-                        ${currentUser ? '<button class="add-to-cart-btn">Add to Cart</button>' : ''}
+                        ${currentUser ? '<button class="add-to-cart-btn" data-id="' + product.id + '">Add to Cart</button>' : ''}
                     `;
                     productList.appendChild(productItem);
                 });
@@ -115,4 +125,41 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         })
         .catch((error) => console.error("Error fetching products:", error));
+
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('add-to-cart-btn')) {
+            const productId = e.target.getAttribute('data-id');
+            addToCart(parseInt(productId));
+        }
+    });
+
+    function addToCart(productId) {
+        fetch(`http://localhost:3000/products/${productId}`)
+            .then(response => response.json())
+            .then(product => {
+                const productInCart = cart.products.find(p => p.productId === productId);
+
+                if (productInCart) {
+                    // Increase quantity if product already in cart
+                    productInCart.quantity += 1;
+                } else {
+                    // Add new product to cart
+                    cart.products.push({ productId, quantity: 1 });
+                }
+
+                // Update cart total
+                cart.total += Number(product.price);
+
+                localStorage.setItem('cart', JSON.stringify(cart));
+                
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Product added to cart!',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+                
+            })
+            .catch(error => console.error("Error adding product to cart:", error));
+    }
 });
