@@ -89,6 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
             Object.keys(groupedProducts).forEach((category) => {
                 const categoryDiv = document.createElement("div");
                 categoryDiv.classList.add("category-item");
+                categoryDiv.id = `${category}`;
 
                 // Category title
                 const categoryTitle = document.createElement("h3");
