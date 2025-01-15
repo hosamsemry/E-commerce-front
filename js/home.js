@@ -58,6 +58,14 @@ window.addEventListener('DOMContentLoaded', () => {
 
             renderProducts(products);
 
+            const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const productId = parseInt(button.getAttribute('data-id'));
+                    addToCart(productId);
+                });
+            });
+
             
             searchButton.addEventListener('click', () => {
                 const searchTerm = searchInput.value.toLowerCase();
@@ -124,12 +132,9 @@ window.addEventListener('DOMContentLoaded', () => {
         })
         .catch((error) => console.error("Error fetching products:", error));
 
-    document.addEventListener('click', (e) => {
-        if (e.target.classList.contains('add-to-cart-btn')) {
-            const productId = e.target.getAttribute('data-id');
-            addToCart(parseInt(productId));
-        }
-    });
+        
+        
+        
 
     function addToCart(productId) {
         fetch(`http://localhost:3000/products/${productId}`)
