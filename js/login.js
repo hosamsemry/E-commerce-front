@@ -1,13 +1,14 @@
+import FormValidator from './form-validation.js';
+
 window.addEventListener('load', () => {
   const loginBtn = document.getElementById('login-btn');
 
   loginBtn.addEventListener('click', function (event) {
     event.preventDefault();
-    
-    const username = document.getElementById('login-username').value;
-    const password = document.getElementById('login-password').value;
 
-    
+    const username = document.getElementById('login-username').value.trim();
+    const password = document.getElementById('login-password').value.trim();
+
     if (!username || !password) {
       Swal.fire({
         icon: 'warning',
@@ -17,13 +18,34 @@ window.addEventListener('load', () => {
       return;
     }
 
-    
+    const usernameValidation = FormValidator.validateUsername(username);
+    if (!usernameValidation.valid) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Invalid Username',
+        text: usernameValidation.message,
+      });
+      return;
+    }
+
+    const passwordValidation = FormValidator.validatePassword(password);
+    if (!passwordValidation.valid) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Invalid Password',
+        text: passwordValidation.message,
+      });
+      return;
+    }
+
     fetch('http://localhost:3000/users')
       .then(response => response.json())
       .then(users => {
         try {
-          const user = users.find(user => user.username.toLowerCase() === username.toLowerCase() &&
-            user.password === password);
+          const user = users.find(user =>
+            user.username.toLowerCase() === username.toLowerCase() &&
+            user.password === password
+          );
 
           if (user) {
             sessionStorage.setItem('currentUser', JSON.stringify(user));
@@ -44,21 +66,21 @@ window.addEventListener('load', () => {
                   title: 'Oops...',
                   text: 'Role not recognized',
                 });
-              }
-              } else {
-              Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Invalid username or password',
-              });
+            }
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Invalid username or password',
+            });
           }
         } catch (error) {
           console.error('Error processing data:', error);
-            Swal.fire({
+          Swal.fire({
             icon: 'error',
             title: 'Oops...',
             text: 'An error occurred while logging in. Please try again later.',
-            });
+          });
         }
       })
       .catch(error => {
