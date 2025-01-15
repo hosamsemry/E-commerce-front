@@ -24,12 +24,16 @@
 
 
   <div class="dashboard">
-    
+    <div class="manage-btn">
+      <button id="manageProductsBtn">Manage Products</button>
+      <button id="manageOrdersBtn">Manage Orders</button>
+    </div>
     <button id="addProductBtn">Add Product</button>
 
     <div id="productList" class="product-list"></div>
-    
-    <!-- Add/Edit Product Form -->
+    <div id="orderList" class="order-list hidden"></div>
+
+    <!-- edit and add -->
     <div id="productForm" class="product-form hidden">
       <h2 id="formTitle">Add Product</h2>
       <form id="addProductForm">

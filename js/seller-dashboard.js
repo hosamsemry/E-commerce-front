@@ -5,11 +5,51 @@ window.addEventListener('load', () => {
       window.location.href = './home.html';
   }
 
-  document.getElementById('addProductBtn').addEventListener('click', showProductForm);
+  document.getElementById('manageProductsBtn').addEventListener('click', () => {
+    showProductView();
+  });
+
+  document.getElementById('manageOrdersBtn').addEventListener('click', () => {
+    showOrderView();
+  });
+
+  document.getElementById('addProductBtn').addEventListener('click', () => {
+    showProductForm();
+  });
+
   document.getElementById('cancelBtn').addEventListener('click', hideProductForm);
   document.getElementById('addProductForm').addEventListener('submit', handleFormSubmit);
 
   fetchProducts();
+  document.getElementById('orderList').classList.add('hidden');
+
+});
+
+  
+function showProductView() {
+  document.getElementById('productList').classList.remove('hidden');
+  document.getElementById('addProductBtn').classList.remove('hidden');
+  document.getElementById('productForm').classList.add('hidden');
+  document.getElementById('orderList').classList.add('hidden');
+
+  fetchProducts();
+}
+
+// Show Orders View
+function showOrderView() {
+  document.getElementById('productList').classList.add('hidden');
+  document.getElementById('addProductBtn').classList.add('hidden');
+  document.getElementById('productForm').classList.add('hidden');
+  document.getElementById('orderList').classList.remove('hidden');
+
+  fetchOrders();
+}
+
+
+document.getElementById('manageOrdersBtn').addEventListener('click', () => {
+  document.getElementById('productForm').classList.add('hidden');
+  document.getElementById('productList').classList.add('hidden');
+  fetchOrders();
 });
 
 // Delegated event listener for Edit and Delete buttons
@@ -113,6 +153,115 @@ if (res.ok) {
         });
 }
 }
+
+async function fetchOrders() {
+  const resOrders = await fetch('http://localhost:3000/orders');
+  const orders = await resOrders.json();
+
+  const resProducts = await fetch('http://localhost:3000/products');
+  const products = await resProducts.json();
+
+  const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+  const orderList = document.getElementById('orderList');
+  orderList.innerHTML = '';
+
+  // Filter products owned by the seller
+  const sellerProducts = products.filter(product => product.sellerId == currentUser.id);
+
+  // Filter orders that contain the seller's products
+  const sellerOrders = orders.filter(order =>
+    order.products.some(orderProduct =>
+      sellerProducts.some(product => product.id == orderProduct.productId)
+    )
+  );
+
+  if (sellerOrders.length === 0) {
+    orderList.innerHTML = '<p>No orders found for your products.</p>';
+    return;
+  }
+
+  // Display order details with product name, price, and status
+  sellerOrders.forEach(order => {
+    const orderDiv = document.createElement('div');
+    orderDiv.classList.add('order-item');
+
+    // Get products in the order that belong to the seller
+    const sellerOrderProducts = order.products
+      .map(orderProduct => {
+        const product = sellerProducts.find(p => p.id == orderProduct.productId);
+        if (product) {
+          return `
+            
+              <li><strong>Product Name:</strong> ${product.name} <br></li>
+              <li><strong>Price:</strong> $${product.price} <br></li>
+              <li><strong>Quantity:</strong> ${orderProduct.quantity} <br></li>
+              <li><strong>Total Price:</strong> ${orderProduct.quantity *product.price} <br></li>
+              <li><strong>Status:</strong> ${order.status}</li>
+            
+          `;
+        }
+        return '';
+      })
+      .join('');
+
+    orderDiv.innerHTML = `
+      <h3>Order ID: ${order.id}</h3>
+      <p><strong>Customer ID:</strong> ${order.customerId}</p>
+      
+      <ul class="order-details">${sellerOrderProducts}</ul>
+      <select class="status-dropdown" data-id="${order.id}">
+        <option value="pending" ${order.status === 'pending' ? 'selected' : ''}>pending</option>
+        <option value="processing" ${order.status === 'processing' ? 'selected' : ''}>processing</option>
+        <option value="shipped" ${order.status === 'shipped' ? 'selected' : ''}>shipped</option>
+        <option value="delivered" ${order.status === 'delivered' ? 'selected' : ''}>delivered</option>
+      </select>
+      <button class="update-status-btn" data-id="${order.id}">Update Status</button>
+      
+    `;
+
+    orderList.appendChild(orderDiv);
+  });
+}
+
+
+// Handle order status update
+document.getElementById('orderList').addEventListener('click', async (event) => {
+  event.preventDefault();
+  // Update Order Status
+  if (event.target.classList.contains('update-status-btn')) {
+    const orderId = event.target.dataset.id;
+    const statusSelect = event.target.previousElementSibling;
+    const newStatus = statusSelect.value;
+
+    const res = await fetch(`http://localhost:3000/orders/${orderId}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status: newStatus })
+    });
+
+    if (res.ok) {
+      Swal.fire({
+        icon: 'success',
+        title: 'Order status updated',
+        showConfirmButton: false,
+        timer: 1500
+      }).then(() => {
+        // Refresh orders without switching back to products
+        fetchOrders();
+      });
+
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Failed to update status',
+        showConfirmButton: false,
+        timer: 1500
+      });
+    }
+  }
+  }
+);
+
 
 let isEditing = false;  // Flag to track form mode
 let editingProductId = null;  // Track product being edited
