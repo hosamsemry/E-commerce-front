@@ -5,7 +5,7 @@ export const cart = {
     total: 0,
     status: "pending"
 };
-
+sdf
 
 const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
                 addToCartButtons.forEach(button => {

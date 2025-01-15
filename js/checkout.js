@@ -1,22 +1,19 @@
-// Retrieve the cart data from sessionStorage
 const cart = JSON.parse(localStorage.getItem('cart')) || { products: [], total: 0 };
 
-// Function to render cart items
+
 function renderCartItems() {
     const cartItemsContainer = document.getElementById('cart-items');
     const totalPriceElement = document.getElementById('total-price');
     let total = 0;
 
-    // Clear any existing cart items
+    
     cartItemsContainer.innerHTML = '';
 
-    // Loop through cart products and add them to the cart-items container
+    
     cart.products.forEach(productInCart => {
-        // Fetch the product details from the server
         fetch(`http://localhost:3000/products/${productInCart.productId}`)
             .then(response => response.json())
             .then(product => {
-                // Create product display elements
                 const productElement = document.createElement('div');
                 productElement.classList.add('cart-item');
                 productElement.innerHTML = `
@@ -27,19 +24,15 @@ function renderCartItems() {
                     <button class="remove-button" data-product-id="${product.id}">Remove</button>
                 `;
 
-                // Add event listener to the remove button
                 const removeButton = productElement.querySelector('.remove-button');
                 removeButton.addEventListener('click', () => {
                     const productId = parseInt(removeButton.getAttribute('data-product-id'));
-
-                    // Remove the product from the cart
                     const updatedProducts = cart.products.filter(product => product.productId !== productId);
                     cart.products = updatedProducts;
 
                     // Update the cart data in localStorage
                     localStorage.setItem('cart', JSON.stringify(cart));
 
-                    // Re-render the cart items
                     renderCartItems();
                 });
 

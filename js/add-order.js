@@ -1,24 +1,38 @@
-const API_URL_ORDERS = 'http://localhost:3000/orders';  // Your backend API URL
+const API_URL_ORDERS = 'http://localhost:3000/orders';  
+const API_URL_PRODUCTS = 'http://localhost:3000/products';
 const addOrderForm = document.getElementById('addOrderForm');
 
-// Example products and their prices
-const productsData = {
-    1: { name: "Mobile", price: 50 },
-    2: { name: "Laptop", price: 500 },
-    3: { name: "Tablet", price: 200 },
-};
+// Fetch products data from the API
+document.addEventListener("DOMContentLoaded", async () => {
+    try {
+        const response = await fetch(API_URL_PRODUCTS);
+        const products = await response.json();
+        
+        const productSelect = document.getElementById("productId");
+        products.forEach(product => {
+            const option = document.createElement("option");
+            option.value = product.id;
+            option.textContent = product.name;
+            productSelect.appendChild(option);
+        });
 
-// Automatically calculate total price when quantity changes
-document.getElementById("quantity").addEventListener("input", function() {
-    const productId = document.getElementById("productId").value;
-    const quantity = this.value;
-    const totalInput = document.getElementById("total");
+        // Automatically calculate total price when quantity changes
+        document.getElementById("quantity").addEventListener("input", function() {
+            const productId = document.getElementById("productId").value;
+            const quantity = this.value;
+            const totalInput = document.getElementById("total");
 
-    if (productsData[productId] && quantity) {
-        const totalPrice = productsData[productId].price * quantity;
-        totalInput.value = totalPrice;
-    } else {
-        totalInput.value = 0;
+            const selectedProduct = products.find(p => p.id == productId);
+            if (selectedProduct && quantity) {
+                const totalPrice = selectedProduct.price * quantity;
+                totalInput.value = totalPrice;
+            } else {
+                totalInput.value = 0;
+            }
+        });
+
+    } catch (error) {
+        console.error("Error fetching products:", error);
     }
 });
 
@@ -26,27 +40,34 @@ document.getElementById("quantity").addEventListener("input", function() {
 addOrderForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    // Collect the form data
-    const customerId = document.getElementById('customerId').value;
-    const productId = document.getElementById('productId').value;
-    const quantity = document.getElementById('quantity').value;
-    const totalPrice = document.getElementById('total').value;
-    const status = document.getElementById('status').value;
-
-    // Construct the order data in the desired format
-    const orderData = {
-        customerId,
-        products: [
-            {
-                productId,
-                quantity
-            }
-        ],
-        total: totalPrice,
-        status
-    };
-
     try {
+        // Fetch existing orders to determine the next order ID
+        const ordersResponse = await fetch(API_URL_ORDERS);
+        const orders = await ordersResponse.json();
+        const orderId = orders.length + 1;
+        const newOrderId = orderId.toString();
+
+        // Collect the form data
+        const customerId = document.getElementById('customerId').value;
+        const productId = document.getElementById('productId').value;
+        const quantity = document.getElementById('quantity').value;
+        const totalPrice = document.getElementById('total').value;
+        const status = document.getElementById('status').value;
+
+        // Construct the order data in the desired format
+        const orderData = {
+            id: newOrderId,
+            customerId,
+            products: [
+                {
+                    productId,
+                    quantity
+                }
+            ],
+            total: totalPrice,
+            status
+        };
+
         // Send the data to the backend API
         const response = await fetch(API_URL_ORDERS, {
             method: 'POST',

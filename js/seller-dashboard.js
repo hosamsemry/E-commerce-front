@@ -21,10 +21,10 @@ window.addEventListener('load', () => {
   document.getElementById('addProductForm').addEventListener('submit', handleFormSubmit);
 
   fetchProducts();
+  
   document.getElementById('orderList').classList.add('hidden');
 
 });
-
   
 function showProductView() {
   document.getElementById('productList').classList.remove('hidden');
@@ -35,7 +35,6 @@ function showProductView() {
   fetchProducts();
 }
 
-// Show Orders View
 function showOrderView() {
   document.getElementById('productList').classList.add('hidden');
   document.getElementById('addProductBtn').classList.add('hidden');
@@ -45,14 +44,13 @@ function showOrderView() {
   fetchOrders();
 }
 
-
 document.getElementById('manageOrdersBtn').addEventListener('click', () => {
   document.getElementById('productForm').classList.add('hidden');
   document.getElementById('productList').classList.add('hidden');
   fetchOrders();
 });
 
-// Delegated event listener for Edit and Delete buttons
+
 document.getElementById('productList').addEventListener('click', (event) => {
   if (event.target.classList.contains('edit-btn')) {
       const productId = event.target.dataset.id;
@@ -63,13 +61,12 @@ document.getElementById('productList').addEventListener('click', (event) => {
   }
 });
 
-// Fetch and display products for the current seller
+
 async function fetchProducts() {
   const res = await fetch('http://localhost:3000/products');
   const products = await res.json();
   const productList = document.getElementById('productList');
   productList.innerHTML = '';
-
   const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
   const sellerProducts = products.filter(product => product.sellerId == currentUser.id);
 
@@ -118,10 +115,16 @@ async function addProduct(event) {
         title: 'Missing Image',
         text: 'Please provide an image link.'
     });
-      return;
+    return;
   }
 
+  const res = await fetch('http://localhost:3000/products');
+  const products = await res.json();
+  const productId = (products.length + 1);
+  const newProductId = productId.toString()
+
   const newProduct = {
+      id: newProductId,
       name,
       price,
       category,
@@ -129,29 +132,29 @@ async function addProduct(event) {
       sellerId: currentUser.id
   };
 
-  const res = await fetch('http://localhost:3000/products', {
+  const resPost = await fetch('http://localhost:3000/products', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newProduct)
   });
 
-if (res.ok) {
-        Swal.fire({
-                icon: 'success',
-                title: 'Product added successfully',
-                showConfirmButton: false,
-                timer: 1500
-        });
-        hideProductForm();
-        fetchProducts();
-} else {
-        Swal.fire({
-                icon: 'error',
-                title: 'Failed to add product',
-                showConfirmButton: false,
-                timer: 1500
-        });
-}
+  if (resPost.ok) {
+    Swal.fire({
+        icon: 'success',
+        title: 'Product added successfully',
+        showConfirmButton: false,
+        timer: 1500
+    });
+    hideProductForm();
+    fetchProducts();
+  } else {
+    Swal.fire({
+        icon: 'error',
+        title: 'Failed to add product',
+        showConfirmButton: false,
+        timer: 1500
+    });
+  }
 }
 
 async function fetchOrders() {
@@ -165,10 +168,10 @@ async function fetchOrders() {
   const orderList = document.getElementById('orderList');
   orderList.innerHTML = '';
 
-  // Filter products owned by the seller
+  
   const sellerProducts = products.filter(product => product.sellerId == currentUser.id);
 
-  // Filter orders that contain the seller's products
+  
   const sellerOrders = orders.filter(order =>
     order.products.some(orderProduct =>
       sellerProducts.some(product => product.id == orderProduct.productId)
@@ -180,14 +183,13 @@ async function fetchOrders() {
     return;
   }
 
-  // Display order details with product name, price, and status
+  
   sellerOrders.forEach(order => {
     const orderDiv = document.createElement('div');
     orderDiv.classList.add('order-item');
 
-    // Get products in the order that belong to the seller
-    const sellerOrderProducts = order.products
-      .map(orderProduct => {
+    
+    const sellerOrderProducts = order.products.map(orderProduct => {
         const product = sellerProducts.find(p => p.id == orderProduct.productId);
         if (product) {
           return `
@@ -211,7 +213,6 @@ async function fetchOrders() {
       <ul class="order-details">${sellerOrderProducts}</ul>
       <select class="status-dropdown" data-id="${order.id}">
         <option value="pending" ${order.status === 'pending' ? 'selected' : ''}>pending</option>
-        <option value="processing" ${order.status === 'processing' ? 'selected' : ''}>processing</option>
         <option value="shipped" ${order.status === 'shipped' ? 'selected' : ''}>shipped</option>
         <option value="delivered" ${order.status === 'delivered' ? 'selected' : ''}>delivered</option>
       </select>
@@ -224,10 +225,10 @@ async function fetchOrders() {
 }
 
 
-// Handle order status update
+
 document.getElementById('orderList').addEventListener('click', async (event) => {
   event.preventDefault();
-  // Update Order Status
+  
   if (event.target.classList.contains('update-status-btn')) {
     const orderId = event.target.dataset.id;
     const statusSelect = event.target.previousElementSibling;
@@ -246,7 +247,7 @@ document.getElementById('orderList').addEventListener('click', async (event) => 
         showConfirmButton: false,
         timer: 1500
       }).then(() => {
-        // Refresh orders without switching back to products
+        
         fetchOrders();
       });
 
@@ -263,15 +264,15 @@ document.getElementById('orderList').addEventListener('click', async (event) => 
 );
 
 
-let isEditing = false;  // Flag to track form mode
-let editingProductId = null;  // Track product being edited
+let isEditing = false;  
+let editingProductId = null;  
 
 async function editProduct(id) {
     const res = await fetch(`http://localhost:3000/products/${id}`);
     const product = await res.json();
     showProductForm();
 
-    isEditing = true;  // Set flag to editing mode
+    isEditing = true;  
     editingProductId = id;
 
     document.getElementById('formTitle').textContent = 'Edit Product';
@@ -319,14 +320,13 @@ function handleFormSubmit(event) {
     event.preventDefault();
 
     if (isEditing) {
-        updateProduct(editingProductId);  // Update if editing
+        updateProduct(editingProductId);  
         isEditing = false;
         editingProductId = null;
     } else {
-        addProduct(event);  // Add if not editing
+        addProduct(event);  
     }
 }
-
 
 async function deleteProduct(id) {
   if (confirm('Are you sure you want to delete this product?')) {

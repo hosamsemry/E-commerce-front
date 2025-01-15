@@ -2,9 +2,9 @@ window.addEventListener('load', () => {
     const registerBtn = document.getElementById('register-btn');
   
     registerBtn.addEventListener('click', function (event) {
-        event.preventDefault(); // Prevent the default form submission behavior
+        event.preventDefault();
         
-        // Get form data
+        
         const username = document.getElementById('reg-username').value.trim();
         const password = document.getElementById('reg-password').value.trim();
         const role = document.getElementById('reg-role').value;
@@ -22,7 +22,8 @@ window.addEventListener('load', () => {
             .then(response => response.json())
             .then(users => {
                 const usernameExists = users.some(user => user.username.toLowerCase() === username.toLowerCase());
-
+                const Id= users.length + 1;
+                const userId = Id.toString();
                 if (usernameExists) {
                     Swal.fire({
                         icon: 'error',
@@ -30,15 +31,15 @@ window.addEventListener('load', () => {
                         text: 'Username already exists. Please choose a different username.'
                     });
                 } else {
-                    // New user object
+                    
                     const newUser = {
-                        id : users.length + 2,
+                        id: userId,
                         username: username,
                         password: password,
                         role: role
                     };
 
-                    // Add the new user to db.json
+                    
                     fetch('http://localhost:3000/users', {
                         method: 'POST',
                         headers: {

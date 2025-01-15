@@ -8,14 +8,17 @@ addProductForm.addEventListener('submit', async (e) => {
     const price = document.getElementById('price').value;
     const category = document.getElementById('category').value;
     const imagee = document.getElementById('imageLink').value;
-    const product = await response.json();
+    const response = await fetch(API_URL_PRODUCTS);
+    const products = await response.json();
+    const id = products.length + 1;
+    const productId = id.toString();
     const productImage = document.createElement('img');
     productImage.src = imagee;
 
-    const response = await fetch(API_URL_PRODUCTS, {
+     await fetch(API_URL_PRODUCTS, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, price, category, productImage })
+        body: JSON.stringify({id:productId, name, price, category, productImage })
     });
 
     

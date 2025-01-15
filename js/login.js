@@ -3,11 +3,11 @@ window.addEventListener('load', () => {
 
   loginBtn.addEventListener('click', function (event) {
     event.preventDefault();
-    // Get form data
+    
     const username = document.getElementById('login-username').value;
     const password = document.getElementById('login-password').value;
 
-    // Basic validation
+    
     if (!username || !password) {
       Swal.fire({
         icon: 'warning',
@@ -17,7 +17,7 @@ window.addEventListener('load', () => {
       return;
     }
 
-    // Fetch data from db.json
+    
     fetch('http://localhost:3000/users')
       .then(response => response.json())
       .then(users => {

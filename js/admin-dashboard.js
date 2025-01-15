@@ -14,19 +14,19 @@ const orderList = document.getElementById('orderList');
 const addUserForm = document.getElementById('addUserForm');
 const addProductForm = document.getElementById('addProductForm');
 
-const API_URL_USERS = 'http://localhost:3000/users';
-const API_URL_PRODUCTS = 'http://localhost:3000/products';
-const API_URL_ORDERS = 'http://localhost:3000/orders';
+const USERS = 'http://localhost:3000/users';
+const PRODUCTS = 'http://localhost:3000/products';
+const ORDERS = 'http://localhost:3000/orders';
 
-// Show and hide sections
+
 function showSection(section) {
     document.querySelectorAll('.section').forEach(sec => sec.classList.add('hidden'));
     document.getElementById(section).classList.remove('hidden');
 }
 
-// Fetch and display users
+
 async function fetchUsers() {
-    const res = await fetch(API_URL_USERS);
+    const res = await fetch(USERS);
     const users = await res.json();
     userList.innerHTML = '';
     users.forEach(user => {
@@ -37,7 +37,7 @@ async function fetchUsers() {
           <span><font style="font-weight:bold; font-size:20px;color:#d14d07;">User Role:</font> ${user.role} </span> 
             </div>
             <div class="btns">
-            <button class="btn""><a style="text-decoration:none; color:white;" href="user-details.html?id=${user.id}" target="_blank">Edit</a></button>
+            <button class="btn""><a style="text-decoration:none; color:white;" href="user-details.html?id=${user.id}">Edit</a></button>
             <button class="btn" onclick="deleteUser(${user.id})">Delete</button>
             </div>
             `;
@@ -46,9 +46,8 @@ async function fetchUsers() {
 }
 
 
-// Fetch and display products
 async function fetchProducts() {
-    const res = await fetch(API_URL_PRODUCTS);
+    const res = await fetch(PRODUCTS);
     const products = await res.json();
     productList.innerHTML = '';
     products.forEach(product => {
@@ -68,9 +67,9 @@ async function fetchProducts() {
     });
 }
 
-// Fetch and display orders
+
 async function fetchOrders() {
-    const res = await fetch(API_URL_ORDERS);
+    const res = await fetch(ORDERS);
     const orders = await res.json();
     orderList.innerHTML = '';
     orders.forEach(order => {
@@ -79,10 +78,9 @@ async function fetchOrders() {
             <strong>Order-number: ${order.id}</strong><br>
             CustomerId: ${order.customerId}<br>
             Total: $${order.total}<br>
-            Status: ${order.status}<br>
-            
-            
+            Status: ${order.status}<br>            
         `;
+
         li.classList.add("order-list-admin")
         const deleteBtn = document.createElement('button');
         deleteBtn.classList.add('btn');
@@ -93,43 +91,6 @@ async function fetchOrders() {
     });
 }
 
-// Add user
-// Add user with role
-// addUserForm.addEventListener('submit', async (e) => {
-//     e.preventDefault();
-//     const username = document.getElementById('username').value;
-//     const password = document.getElementById('password').value; // Assuming password handling is needed
-//     const role = document.getElementById('role').value;
-
-//     await fetch(API_URL_USERS, {
-//         method: 'POST',
-//         headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify({ username, password, role }),
-//     });
-
-//     addUserForm.reset();
-//     fetchUsers();
-// });
-
-
-// Add product
-// addProductForm.addEventListener('submit', async (e) => {
-//     e.preventDefault();
-//     const name = document.getElementById('productName').value;
-//     const price = document.getElementById('productPrice').value;
-
-//     await fetch(API_URL_PRODUCTS, {
-//         method: 'POST',
-//         headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify({ name, price })
-//     });
-
-//     addProductForm.reset();
-//     fetchProducts();
-// });
-
-// Delete functions
-// Delete User with confirmation
 async function deleteUser(id) {
     Swal.fire({
         title: "Are you sure?",
@@ -141,14 +102,14 @@ async function deleteUser(id) {
         confirmButtonText: "Yes, delete it!"
     }).then(async (result) => {
         if (result.isConfirmed) {
-            await fetch(`${API_URL_USERS}/${id}`, { method: 'DELETE' });
+            await fetch(`${USERS}/${id}`, { method: 'DELETE' });
             fetchUsers(); // Refresh user list
             Swal.fire("Deleted!", "User has been deleted.", "success");
         }
     });
 }
 
-// Delete Product with confirmation
+
 async function deleteProduct(id) {
     Swal.fire({
         title: "Are you sure?",
@@ -160,14 +121,14 @@ async function deleteProduct(id) {
         confirmButtonText: "Yes, delete it!"
     }).then(async (result) => {
         if (result.isConfirmed) {
-            await fetch(`${API_URL_PRODUCTS}/${id}`, { method: 'DELETE' });
+            await fetch(`${PRODUCTS}/${id}`, { method: 'DELETE' });
             fetchProducts(); // Refresh product list
             Swal.fire("Deleted!", "Product has been deleted.", "success");
         }
     });
 }
 
-// Delete Order with confirmation
+
 async function deleteOrder(id) {
     Swal.fire({
         title: "Are you sure?",
@@ -179,15 +140,14 @@ async function deleteOrder(id) {
         confirmButtonText: "Yes, delete it!"
     }).then(async (result) => {
         if (result.isConfirmed) {
-            await fetch(`${API_URL_ORDERS}/${id}`, { method: 'DELETE' });
-            fetchOrders(); // Refresh order list
+            await fetch(`${ORDERS}/${id}`, { method: 'DELETE' });
+            fetchOrders(); 
             Swal.fire("Deleted!", "Order has been deleted.", "success");
         }
     });
 }
 
 
-// Initialize
 fetchUsers();
 fetchProducts();
 fetchOrders();
