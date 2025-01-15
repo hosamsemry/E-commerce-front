@@ -13,7 +13,6 @@ header {
     text-align: left;
     position: top;
     top: 0;
-    
 }
 
 header nav ul {
@@ -25,7 +24,6 @@ header nav ul {
 header nav ul li{
     display: inline-block;
     list-style: none;
-    
     text-align: left;
 }
 

@@ -1,4 +1,4 @@
-/* General Reset */
+
 html {
     scroll-behavior: smooth;
 }
@@ -15,11 +15,10 @@ body {
     color: #333;
 }
 
-/* Header */
 header {
     background-color: #d14d07;
     color: white;
-    padding: 1rem;
+    padding: 16px;
     text-align: center;
     position: sticky;
     top: 0;
@@ -34,7 +33,6 @@ header h1 {
 
 header nav ul {
     display: inline-block;
-    
     list-style: none;
     padding: 0;
     text-align: center;
@@ -51,7 +49,7 @@ header nav ul li a {
     text-decoration: none;
     color: rgb(255, 255, 255);
     font-weight: bold;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 16px;
     transition: background-color 0.3s ease;
 }
 
@@ -59,7 +57,6 @@ header nav ul li a:hover {
     background-color: #d14d07;
 }
 
-/* Main Content */
 main {
     padding: 2rem;
     display: flex;
@@ -69,7 +66,6 @@ main {
 
 .section {
     width: 70%;
-    
     background: #fff;
     padding: 30px;
     border-radius: 8px;
@@ -145,7 +141,7 @@ main {
 }
 
 .section form button {
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 16px;
     background-color: #e4610a;
     color: white;
     border: none;
@@ -169,7 +165,6 @@ main {
     display: none;
 }
 
-/* Lists */
 ul {
     list-style: none;
     padding: 0;
@@ -202,7 +197,7 @@ ul {
     color: white;
     border: none;
     border-radius: 5px;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 16px;
     cursor: pointer;
     transition: background-color 0.3s ease;
     width: 80px;

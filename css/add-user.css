@@ -1,20 +1,20 @@
 header {
     display: flex;
-    align-items: center; /* Vertically center items */
-    justify-content: flex-start; /* Align items to the left */
+    align-items: center; 
+    justify-content: flex-start; 
     width: 100%;
     padding: 10px 20px;
     box-sizing: border-box;
-    position: relative; /* Needed for absolute positioning */
+    position: relative; 
     height: 60px;
 }
 
 header h1 {
-    margin: 0 auto; /* Center the title */
+    margin: 0 auto; 
     text-align: center;
     position: absolute;
     left: 50%;
-    transform: translateX(-50%); /* Perfect horizontal centering */
+    transform: translateX(-50%); 
 }
 
 header a {
@@ -43,7 +43,6 @@ section {
     flex-direction: column;
     align-items: center;
     width: 50%;
-    
 }
 
 #addUserForm input {
@@ -66,7 +65,7 @@ section {
 
 #addUserForm button {
     display: inline-block;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 16px;
     font-weight: bold;
     font-size: 18px;
     margin-top: 25px;

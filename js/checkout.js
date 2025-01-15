@@ -1,5 +1,11 @@
 const cart = JSON.parse(localStorage.getItem('cart')) || { products: [], total: 0 };
 
+fetch('http://localhost:3000/orders')
+        .then(response => response.json())
+        .then(orders => {
+            const newOrderId = (orders.length + 1).toString();
+            cart.id = newOrderId;
+         })
 
 function renderCartItems() {
     const cartItemsContainer = document.getElementById('cart-items');
@@ -30,29 +36,23 @@ function renderCartItems() {
                     const updatedProducts = cart.products.filter(product => product.productId !== productId);
                     cart.products = updatedProducts;
 
-                    // Update the cart data in localStorage
                     localStorage.setItem('cart', JSON.stringify(cart));
 
                     renderCartItems();
                 });
 
                 cartItemsContainer.appendChild(productElement);
-
-                // Update the total price
                 total += product.price * productInCart.quantity;
                 totalPriceElement.textContent = `Total Price: $${total}`;
             })
             .catch(error => console.error("Error fetching product:", error));
     });
 
-    // Update the total price after all products are rendered
     totalPriceElement.textContent = `Total Price: $${total}`;
 }
 
-// Call the function to render the cart items on page load
 renderCartItems();
 
-// Add functionality for the checkout button
 const checkoutButton = document.getElementById('checkout-button');
 checkoutButton.addEventListener('click', () => {
     if (cart.products.length === 0) {
@@ -65,7 +65,6 @@ checkoutButton.addEventListener('click', () => {
         return;
     }
 
-    // Post the cart data to the orders endpoint
     fetch('http://localhost:3000/orders', {
         method: 'POST',
         headers: {
@@ -75,8 +74,6 @@ checkoutButton.addEventListener('click', () => {
     })
     .then(response => response.json())
     .then(() => {
-        
-        // Clear the cart data from localStorage
         localStorage.removeItem('cart');
 
         Swal.fire({
@@ -87,7 +84,6 @@ checkoutButton.addEventListener('click', () => {
             timer: 2000
         });
 
-        // Clear the cart items from the page
         document.getElementById('cart-items').innerHTML = '';
         document.getElementById('total-price').textContent = 'Total Price: $0';
     })

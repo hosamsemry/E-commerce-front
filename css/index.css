@@ -12,7 +12,6 @@ body, h1, p, ul, li {
     background-repeat: no-repeat;
   }
   
-  /* Header */
   header {
     background: #d14d07;
     color: #ffffff;
@@ -40,13 +39,12 @@ body, h1, p, ul, li {
     color: #000;
   }
 
- /* Main Content */
+
   main {
     padding: 20px;
     margin-left: 20px;
     text-align: left;
     width: 40%;
-    
   }
 
   .heading {
@@ -59,7 +57,6 @@ body, h1, p, ul, li {
     font-size: 25px;
     color: whitesmoke;
   }
-
 
 .shop-btn {
   background-color: #e4610a;
@@ -79,7 +76,6 @@ body, h1, p, ul, li {
   animation-duration: 2s;
   animation-iteration-count: infinite;
   animation-timing-function: ease-in-out;
-  
 }
 
 .shop-btn:hover {
@@ -100,7 +96,6 @@ body, h1, p, ul, li {
     
   }
 }
-
 
 .features {
   text-align: left;
@@ -125,13 +120,12 @@ body, h1, p, ul, li {
   margin-left: 2px;
 }
 
-  /* Footer */
-  footer {
-    background: #d14d07;
-    color: #fff;
-    text-align: center;
-    padding: 10px 0;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
+footer {
+  background: #d14d07;
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
   }

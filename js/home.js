@@ -1,14 +1,3 @@
-export { cart };
-let cart = {};
-const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
-if (currentUser){
-cart = {
-    customerId: currentUser.id,
-    products: [],
-    total: 0,
-    status: "pending"
-};}
-
 window.addEventListener('DOMContentLoaded', () => {
 
     if (!sessionStorage.getItem('currentUser')) {
@@ -146,28 +135,27 @@ window.addEventListener('DOMContentLoaded', () => {
         fetch(`http://localhost:3000/products/${productId}`)
             .then(response => response.json())
             .then(product => {
+                let cart = JSON.parse(localStorage.getItem('cart')) || { products: [], total: 0 };
                 const productInCart = cart.products.find(p => p.productId === productId);
-
+    
                 if (productInCart) {
                     productInCart.quantity += 1;
                 } else {
                     cart.products.push({ productId, quantity: 1 });
                 }
-
+    
                 cart.total += Number(product.price);
-
                 localStorage.setItem('cart', JSON.stringify(cart));
-                
+    
                 Swal.fire({
                     title: 'Success!',
                     text: 'Product added to cart!',
                     icon: 'success',
                     confirmButtonText: 'OK'
                 });
-                
-            })
-            .catch(error => console.error("Error adding product to cart:", error));
+            });
     }
+    
 
 });
 

@@ -21,7 +21,7 @@ body {
   }
 
   header nav {
-    order: -1; /* This will move the nav to the left */
+    order: -1; 
   }
 
   header nav ul {

@@ -1,10 +1,7 @@
 window.addEventListener('load', () => {
-   
     const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
-
     if (!currentUser || currentUser.role !== 'admin') {
-      
-      window.location.href = './home.html'; 
+            window.location.href = './home.html'; 
     }
   });
 
@@ -13,7 +10,6 @@ const productList = document.getElementById('productList');
 const orderList = document.getElementById('orderList');
 const addUserForm = document.getElementById('addUserForm');
 const addProductForm = document.getElementById('addProductForm');
-
 const USERS = 'http://localhost:3000/users';
 const PRODUCTS = 'http://localhost:3000/products';
 const ORDERS = 'http://localhost:3000/orders';
@@ -24,27 +20,27 @@ function showSection(section) {
     document.getElementById(section).classList.remove('hidden');
 }
 
-
 async function fetchUsers() {
     const res = await fetch(USERS);
     const users = await res.json();
     userList.innerHTML = '';
     users.forEach(user => {
-        const li = document.createElement('li');
-        li.innerHTML = `
-            <div class="user-li-admin">
-                <span><font style="font-weight:bold; font-size:20px;color:#d14d07;">User Name:</font> ${user.username}</span>
-          <span><font style="font-weight:bold; font-size:20px;color:#d14d07;">User Role:</font> ${user.role} </span> 
-            </div>
-            <div class="btns">
-            <button class="btn""><a style="text-decoration:none; color:white;" href="user-details.html?id=${user.id}">Edit</a></button>
-            <button class="btn" onclick="deleteUser(${user.id})">Delete</button>
-            </div>
-            `;
-        userList.appendChild(li);
+        if (user.role !== 'admin') {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <div class="user-li-admin">
+                    <span><font style="font-weight:bold; font-size:20px;color:#d14d07;">User Name:</font> ${user.username}</span>
+              <span><font style="font-weight:bold; font-size:20px;color:#d14d07;">User Role:</font> ${user.role} </span> 
+                </div>
+                <div class="btns">
+                <button class="btn""><a style="text-decoration:none; color:white;" href="user-details.html?id=${user.id}">Edit</a></button>
+                <button class="btn" onclick="deleteUser(${user.id})">Delete</button>
+                </div>
+                `;
+            userList.appendChild(li);
+        }
     });
 }
-
 
 async function fetchProducts() {
     const res = await fetch(PRODUCTS);
@@ -66,7 +62,6 @@ async function fetchProducts() {
         productList.appendChild(li);
     });
 }
-
 
 async function fetchOrders() {
     const res = await fetch(ORDERS);
@@ -103,12 +98,11 @@ async function deleteUser(id) {
     }).then(async (result) => {
         if (result.isConfirmed) {
             await fetch(`${USERS}/${id}`, { method: 'DELETE' });
-            fetchUsers(); // Refresh user list
+            fetchUsers(); 
             Swal.fire("Deleted!", "User has been deleted.", "success");
         }
     });
 }
-
 
 async function deleteProduct(id) {
     Swal.fire({
@@ -122,12 +116,11 @@ async function deleteProduct(id) {
     }).then(async (result) => {
         if (result.isConfirmed) {
             await fetch(`${PRODUCTS}/${id}`, { method: 'DELETE' });
-            fetchProducts(); // Refresh product list
+            fetchProducts(); 
             Swal.fire("Deleted!", "Product has been deleted.", "success");
         }
     });
 }
-
 
 async function deleteOrder(id) {
     Swal.fire({
@@ -146,7 +139,6 @@ async function deleteOrder(id) {
         }
     });
 }
-
 
 fetchUsers();
 fetchProducts();

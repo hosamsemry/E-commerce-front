@@ -13,7 +13,7 @@
       "id": "2"
     },
     {
-      "username": "samyy",
+      "username": "samy",
       "password": "hosam",
       "role": "customer",
       "id": "3"
@@ -25,10 +25,10 @@
       "role": "seller"
     },
     {
-      "id": "7",
       "username": "hashim",
       "password": "hosam",
-      "role": "customer"
+      "role": "admin",
+      "id": "7"
     },
     {
       "id": "8",
@@ -319,6 +319,16 @@
       ],
       "total": "50",
       "status": "pending"
+    },
+    {
+      "id": "10",
+      "products": [
+        {
+          "productId": 2,
+          "quantity": 1
+        }
+      ],
+      "total": 42
     }
   ]
 }
