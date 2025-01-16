@@ -23,6 +23,7 @@ function renderCartItems() {
                 const productElement = document.createElement('div');
                 productElement.classList.add('cart-item');
                 productElement.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}">
                     <h3>${product.name}</h3>
                     <p>Quantity: ${productInCart.quantity}</p>
                     <p>Price: $${product.price}</p>
@@ -33,8 +34,13 @@ function renderCartItems() {
                 const removeButton = productElement.querySelector('.remove-button');
                 removeButton.addEventListener('click', () => {
                     const productId = parseInt(removeButton.getAttribute('data-product-id'));
-                    const updatedProducts = cart.products.filter(product => product.productId !== productId);
-                    cart.products = updatedProducts;
+                    const productInCart = cart.products.find(product => product.productId === productId);
+
+                    if (productInCart.quantity > 1) {
+                        productInCart.quantity -= 1;
+                    } else {
+                        cart.products = cart.products.filter(product => product.productId !== productId);
+                    }
 
                     localStorage.setItem('cart', JSON.stringify(cart));
 
