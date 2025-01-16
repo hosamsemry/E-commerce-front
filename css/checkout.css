@@ -56,7 +56,6 @@ h1 {
     flex-direction: rows;
     gap: 30px;
     margin-left: 20px;
-    border: 1px solid #828282;
     padding: 15px;
     
 }
