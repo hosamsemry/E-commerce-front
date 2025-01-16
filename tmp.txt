@@ -1,40 +1,12 @@
-let currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
-export const cart = {
-    customerId: currentUser.id,
-    products: [],
-    total: 0,
-    status: "pending"
-};
-sdf
+if (!sessionStorage.getItem('currentUser')) {
+        document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+            button.style.display = 'none';
+        });
 
-const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
-                addToCartButtons.forEach(button => {
-                    button.addEventListener('click', (e) => {
-                        const productId = e.target.getAttribute('data-id');
-                        addToCart(parseInt(productId));
-                    });
-                });
-
-
-function addToCart(productId) {
-        fetch(`http://localhost:3000/products/${productId}`)
-            .then(response => response.json())
-            .then(product => {
-                const productInCart = cart.products.find(p => p.productId === productId);
-
-                if (productInCart) {
-                    // Increase quantity if product already in cart
-                    productInCart.quantity += 1;
-                } else {
-                    // Add new product to cart
-                    cart.products.push({ productId, quantity: 1 });
-                }
-
-                // Update cart total
-                cart.total += Number(product.price);
-
-                alert("Product added to cart!");
-                console.log(cart);
-            })
-            .catch(error => console.error("Error adding product to cart:", error));
+        document.querySelectorAll('wishlist').forEach(button => {
+            button.style.display = 'none';
+        });
+        
+        document.getElementById('check-out').style.display = 'none';
+        logoutButton.style.display = 'none';
     }

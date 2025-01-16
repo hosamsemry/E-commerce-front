@@ -1,3 +1,4 @@
+import { addToWishlist } from "./profile.js";
 window.addEventListener('DOMContentLoaded', () => {
     if (!sessionStorage.getItem('currentUser')) {
         document.querySelectorAll('.add-to-cart-btn').forEach(button => {
@@ -43,7 +44,8 @@ window.addEventListener('DOMContentLoaded', () => {
                         <p>Category: ${product.category}</p>
                         <p>Price: $${product.price}</p>
                         <p class="rating-product">Rate: ${product.rating}/5</p> 
-                        ${currentUser ? `<button class="add-to-cart-btn" data-id="${product.id}">Add to Cart</button>` : ''}
+                        ${currentUser ? `<button class="add-to-cart-btn" data-id="${product.id}">Add to Cart</button>
+                                        <button class="add-to-wishlist-btn" data-id="${product.id}">Add to Wishlist</button>` : ''}
                     `;
                     productsContainer.appendChild(productCard);
                 });
@@ -54,6 +56,13 @@ window.addEventListener('DOMContentLoaded', () => {
                     button.addEventListener('click', () => {
                         const productId = parseInt(button.getAttribute('data-id'));
                         addToCart(productId);
+                    });
+                });
+
+                document.querySelectorAll('.add-to-wishlist-btn').forEach(button => {
+                    button.addEventListener('click', () => {
+                        const productId = parseInt(button.getAttribute('data-id'));
+                        addToWishlist(productId);  
                     });
                 });
             };
@@ -84,13 +93,19 @@ window.addEventListener('DOMContentLoaded', () => {
                             <div class="product-name-category">${product.name}</div>
                             <span class="price">Price: $${product.price}</span> 
                             <p class="rating-category">Rate: ${product.rating}/5</p> 
-                            ${currentUser ? '<button class="add-to-cart-btn" data-id="' + product.id + '">Add to Cart</button>' : ''}
+                            ${currentUser ? `<button class="add-to-cart-btn" data-id="${product.id}">Add to Cart</button>
+                                        <button class="add-to-wishlist-btn" data-id="${product.id}">Add to Wishlist</button>` : ''}
                         `;
                         productList.appendChild(productItem);
                     });
                     categoryDiv.appendChild(productList);
-
                     categoryGrid.appendChild(categoryDiv);
+                });
+                document.querySelectorAll('.add-to-wishlist-btn').forEach(button => {
+                    button.addEventListener('click', () => {
+                        const productId = parseInt(button.getAttribute('data-id'));
+                        addToWishlist(productId);  
+                    });
                 });
             };
 

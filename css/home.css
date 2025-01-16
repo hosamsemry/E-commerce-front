@@ -335,6 +335,23 @@ nav ul li a {
     background-color: #f58134;
 }
 
+.add-to-wishlist-btn {
+    margin-left: 15px;
+    padding: 8px;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #13a000;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: .3s;
+    width: 200px;
+}
+.add-to-wishlist-btn:hover {
+    background-color: #00c000;
+}
+
 .categories h2 {
     text-align: center;
     margin-bottom: 20px;

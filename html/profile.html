@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="../css/profile.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="home.html">Shop</a></li>
+                <li><a href="about.html">About As</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="login.html">logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <h1 class="user-profile">User Profile</h1>
+        <div id="profile-container">
+            <p><strong>Name:</strong> <span id="user-name"></span></p>
+            <p><strong>Role:</strong> <span id="user-role"></span></p>
+        </div>
+    <h2>Your Wishlist</h2>
+        <div id="wishlist-items"></div>
+        
+    <h2>Your past orders</h2>
+        <div id="order-items"></div>    
+    
+
+    <script type="module" src="../js/profile.js"></script>
+</body>
+</html>
