@@ -200,8 +200,8 @@ function loadOrders() {
 
 window.addEventListener('DOMContentLoaded', () => {
     const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
-
-    if (!currentUser) {
+    const protectedPages = ["../html/profile.html","../html/checkout.html"];
+    if (!currentUser && protectedPages.includes(window.location.pathname)) {
         Swal.fire({
             icon: 'warning',
             title: 'No user is logged in.',

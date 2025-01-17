@@ -4,15 +4,21 @@ window.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.add-to-cart-btn').forEach(button => {
             button.style.display = 'none';
         });
+        document.getElementById('login').style.display = 'block';
+        document.getElementById('check-out').style.display = 'none';
+        document.getElementById('profile').style.display = 'none';
+        document.getElementById('logout').style.display = 'none';
+    }else{
+        document.getElementById('login').style.display = 'none';
+    }
 
-        const logoutButton = document.getElementById('logout');
+    const logoutButton = document.getElementById('logout');
         if (logoutButton) {
             logoutButton.addEventListener('click', () => {
                 sessionStorage.clear();
             });
         }
-    }
-
+    
     const productsContainer = document.getElementById('products-container');
     const categoryGrid = document.getElementById('category-grid');
     const searchInput = document.getElementById('search');
