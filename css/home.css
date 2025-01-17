@@ -156,7 +156,7 @@ nav ul li a {
 }
 
 .category-item {
-    
+    margin: 0 auto;
     background-color: white;
     padding: 15px;
     border: 1px solid #ccc;
