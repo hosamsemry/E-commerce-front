@@ -1,5 +1,6 @@
 import { addToWishlist } from "./profile.js";
 window.addEventListener('DOMContentLoaded', () => {
+    
     if (!sessionStorage.getItem('currentUser')) {
         document.querySelectorAll('.add-to-cart-btn').forEach(button => {
             button.style.display = 'none';
@@ -16,6 +17,7 @@ window.addEventListener('DOMContentLoaded', () => {
         if (logoutButton) {
             logoutButton.addEventListener('click', () => {
                 sessionStorage.clear();
+                window.location.href = "login.html";
             });
         }
     
@@ -50,27 +52,12 @@ window.addEventListener('DOMContentLoaded', () => {
                         <p>Category: ${product.category}</p>
                         <p>Price: $${product.price}</p>
                         <p class="rating-product">Rate: ${product.rating}/5</p> 
-                        ${currentUser ? `<button class="add-to-cart-btn" data-id="${product.id}">Add to Cart</button>
-                                        <button class="add-to-wishlist-btn" data-id="${product.id}">Add to Wishlist</button>` : ''}
+                        ${currentUser ? `<button type="button" class="add-to-cart-btn" data-id="${product.id}">Add to Cart</button>
+                                        <button type="button" class="add-to-wishlist-btn" data-id="${product.id}">Add to Wishlist</button>` : ''}
                     `;
                     productsContainer.appendChild(productCard);
                 });
 
-                
-                const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
-                addToCartButtons.forEach(button => {
-                    button.addEventListener('click', () => {
-                        const productId = parseInt(button.getAttribute('data-id'));
-                        addToCart(productId);
-                    });
-                });
-
-                document.querySelectorAll('.add-to-wishlist-btn').forEach(button => {
-                    button.addEventListener('click', () => {
-                        const productId = parseInt(button.getAttribute('data-id'));
-                        addToWishlist(productId);  
-                    });
-                });
             };
 
             
@@ -99,20 +86,15 @@ window.addEventListener('DOMContentLoaded', () => {
                             <div class="product-name-category">${product.name}</div>
                             <span class="price">Price: $${product.price}</span> 
                             <p class="rating-category">Rate: ${product.rating}/5</p> 
-                            ${currentUser ? `<button class="add-to-cart-btn" data-id="${product.id}">Add to Cart</button>
-                                        <button class="add-to-wishlist-btn" data-id="${product.id}">Add to Wishlist</button>` : ''}
+                            ${currentUser ? `<button type="button" class="add-to-cart-btn" data-id="${product.id}">Add to Cart</button>
+                                        <button type="button" class="add-to-wishlist-btn" data-id="${product.id}">Add to Wishlist</button>` : ''}
                         `;
                         productList.appendChild(productItem);
                     });
                     categoryDiv.appendChild(productList);
                     categoryGrid.appendChild(categoryDiv);
                 });
-                document.querySelectorAll('.add-to-wishlist-btn').forEach(button => {
-                    button.addEventListener('click', () => {
-                        const productId = parseInt(button.getAttribute('data-id'));
-                        addToWishlist(productId);  
-                    });
-                });
+                
             };
 
             
@@ -120,7 +102,9 @@ window.addEventListener('DOMContentLoaded', () => {
             renderCategories(products);
 
             
-            searchButton.addEventListener('click', () => {
+            
+            searchButton.addEventListener('click', (e) => {
+                e.preventDefault();
                 const searchTerm = searchInput.value.toLowerCase();
                 const filteredProducts = products.filter(product =>
                     product.name.toLowerCase().includes(searchTerm) ||
@@ -130,7 +114,8 @@ window.addEventListener('DOMContentLoaded', () => {
                 renderCategories(filteredProducts);
             });
 
-            searchInput.addEventListener('input', () => {
+            searchInput.addEventListener('input', (e) => {
+                e.preventDefault();
                 const searchTerm = searchInput.value.toLowerCase();
                 const filteredProducts = products.filter(product =>
                     product.name.toLowerCase().includes(searchTerm) ||
@@ -139,9 +124,30 @@ window.addEventListener('DOMContentLoaded', () => {
                 renderProducts(filteredProducts);
                 renderCategories(filteredProducts);
             });
+            
+            const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+                addToCartButtons.forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const productId = parseInt(button.getAttribute('data-id'));
+                        addToCart(productId);
+                    });
+                });
+
+                const addToWishlistButtons = document.querySelectorAll('.add-to-wishlist-btn');
+                addToWishlistButtons.forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const productId = parseInt(button.getAttribute('data-id'));
+                        addToWishlist(productId);  
+                    });
+                });
+            
         })
         .catch((error) => console.error("Error fetching products:", error));
 
+
+        
     function addToCart(productId) {
         fetch(`http://localhost:3000/products/${productId}`)
             .then(response => response.json())
@@ -166,4 +172,6 @@ window.addEventListener('DOMContentLoaded', () => {
                 });
             });
     }
+
+    
 });

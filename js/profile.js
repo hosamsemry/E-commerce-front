@@ -1,42 +1,44 @@
-export function addToWishlist(productId) {
-    const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
-    if (!currentUser) {
-        document.querySelectorAll('wishlist').forEach(button => {
-            button.style.display = 'none';
-        });
-        return;
+export async function addToWishlist(productId) {
+    try {
+        const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+        if (!currentUser) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Not Logged In',
+                text: 'Please log in to add items to your wishlist.'
+            });
+            return;
+        }
+        const response = await fetch(`http://localhost:3000/users/${currentUser.id}`);
+        const user = await response.json();
+        
+        user.wishlist = user.wishlist || [];
+
+        if (!user.wishlist.includes(productId)) {
+            user.wishlist.push(productId);
+
+            await fetch(`http://localhost:3000/users/${currentUser.id}`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ wishlist: user.wishlist })
+            });
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Added',
+                text: 'Product added to your wishlist!'
+                
+            });
+        } else {
+            Swal.fire({
+                icon: 'info',
+                title: 'Info',
+                text: 'This product is already in your wishlist.'
+            });
+        }
+    } catch (err) {
+        console.error('Error fetching or updating user data:', err);
     }
-
-    fetch(`http://localhost:3000/users/${currentUser.id}`)
-        .then(response => response.json())
-        .then(user => {
-            user.wishlist = user.wishlist || [];  
-
-            if (!user.wishlist.includes(productId)) {
-                user.wishlist.push(productId);
-
-                fetch(`http://localhost:3000/users/${currentUser.id}`, {
-                    method: 'PATCH',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ wishlist: user.wishlist })
-                })
-                .then(() => {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Success',
-                        text: 'Product added to your wishlist!'
-                    });
-                })
-                .catch(err => console.error('Error updating wishlist:', err));
-            } else {
-                Swal.fire({
-                    icon: 'info',
-                    title: 'Info',
-                    text: 'This product is already in your wishlist.'
-                });
-            }
-        })
-        .catch(err => console.error('Error fetching user data:', err));
 }
 
 function loadWishlist() {
@@ -59,7 +61,7 @@ function loadWishlist() {
                 return;
             }
 
-            wishlistContainer.innerHTML = ''; // Clear previous content
+            wishlistContainer.innerHTML = '';
 
             user.wishlist.forEach(productId => {
                 fetch(`http://localhost:3000/products/${productId}`)
@@ -74,7 +76,7 @@ function loadWishlist() {
                             <img src="${product.image}" alt="${product.name}">
                             <h3>Product name: ${product.name}</h3>
                             <p>Product Price: $${product.price}</p>
-                            <button class="remove-wish" data-id="${product.id}">Remove from Wishlist</button>
+                            <button type="button" class="remove-wish" data-id="${product.id}">Remove from Wishlist</button>
                         `;
                         wishlistContainer.appendChild(productDiv);
                     })
@@ -83,13 +85,13 @@ function loadWishlist() {
         })
         .catch(err => console.error('Error loading wishlist:', err));
 
-    // Attach event listener to the wishlist container using event delegation
-    wishlistContainer.addEventListener('click', (event) => {
-        if (event.target.classList.contains('remove-wish')) {
-            const productId = parseInt(event.target.getAttribute('data-id'));
-            removeWishlist(productId);
-        }
-    });
+        wishlistContainer.addEventListener('click', (event) => {
+            if (event.target.classList.contains('remove-wish')) {
+                event.preventDefault();  // Prevents page reload
+                const productId = parseInt(event.target.getAttribute('data-id'));
+                removeWishlist(productId);
+            }
+        });
 }
 function removeWishlist(productId) {
     const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
@@ -114,7 +116,7 @@ function removeWishlist(productId) {
                         title: 'Removed',
                         text: 'Product removed from your wishlist!'
                     });
-                    loadWishlist(); // Reload the wishlist
+                    
                 })
                 .catch(err => console.error('Error updating wishlist:', err));
             }
@@ -184,31 +186,20 @@ function loadOrders() {
                 orderDiv.appendChild(productsList);
                 orderDiv.appendChild(orderStatus);
 
-                // Display the total amount for the order
                 const totalAmount = document.createElement('p');
                 totalAmount.textContent = `Total Amount: $${order.total}`;
                 orderDiv.appendChild(totalAmount);
-
-                // Append the order div to the orders container
+               
                 ordersContainer.appendChild(orderDiv);
             });
         })
         .catch(err => console.error('Error loading orders:', err));
 }
 
-
-
 window.addEventListener('DOMContentLoaded', () => {
     const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
-    const protectedPages = ["../html/profile.html","../html/checkout.html"];
-    if (!currentUser && protectedPages.includes(window.location.pathname)) {
-        Swal.fire({
-            icon: 'warning',
-            title: 'No user is logged in.',
-            text: 'Please log in to continue.',
-            confirmButtonText: 'OK'
-        });
-        window.location.href = "login.html";
+    if (!currentUser) {
+        window.location.href = "../html/login.html";
         return;
     }
 
