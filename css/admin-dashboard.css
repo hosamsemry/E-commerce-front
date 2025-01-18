@@ -54,7 +54,7 @@ header nav ul li a {
 }
 
 header nav ul li a:hover {
-    background-color: #d14d07;
+    background-color: rgb(68, 62, 62);
 }
 
 main {
