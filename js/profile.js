@@ -198,8 +198,10 @@ function loadOrders() {
 
 window.addEventListener('DOMContentLoaded', () => {
     const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
-    if (!currentUser) {
-        window.location.href = "../html/login.html";
+    const protectedPages = ["profile.html", "checkout.html"];  
+    const currentPage = window.location.pathname.split("/").pop();
+    if (!currentUser && protectedPages.includes(currentPage)) {
+        window.location.href = "login.html";
         return;
     }
 
