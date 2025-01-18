@@ -4,7 +4,7 @@ This document outlines the structure and functionality of an E-commerce platform
 
 ## Roles and Responsibilities
 
-### 1. Admin (45%)
+### 1. Admin
 Admins are responsible for managing the overall platform. Their tasks include monitoring user activities, managing the product catalog, and ensuring compliance with platform policies.
 
 #### Key Features:
@@ -17,7 +17,7 @@ Admins are responsible for managing the overall platform. Their tasks include mo
 - **Order Management:**
     - View and manage all orders.
 
-### 2. Customer (15%)
+### 2. Customer
 Customers can browse, search, and purchase products on the platform. They can also review products and manage their accounts.
 
 #### Key Features:
@@ -32,7 +32,7 @@ Customers can browse, search, and purchase products on the platform. They can al
 - **Cart and Wishlist:**
     - Manage items in the cart and wishlist.
 
-### 3. Seller (35%)
+### 3. Seller
 Sellers can list and manage their products, view their sales, and interact with Customers regarding their products.
 
 #### Key Features:
@@ -43,7 +43,7 @@ Sellers can list and manage their products, view their sales, and interact with 
     - View orders placed by Customers.
     - Update order status (e.g., shipped, delivered).
 
-### 4. Anonymous User (5%)
+### 4. Anonymous User 
 Anonymous users can explore the platform with limited access. To make purchases or leave reviews, they need to register.
 
 #### Key Features:
@@ -56,5 +56,3 @@ Anonymous users can explore the platform with limited access. To make purchases 
 - **Database:** db.json
 - **Version Control:** Git
 
-## Deadline:
-- **11th January 2025**
