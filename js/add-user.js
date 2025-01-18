@@ -8,11 +8,6 @@ addUserForm.addEventListener('submit', async (e) => {
     const password = document.getElementById('password').value;
     const role = document.getElementById('role').value;
 
-    await fetch(USERS, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({username, password, role })
-    });
     const response = await fetch(USERS);
     const users = await response.json();
     const user = users.length + 1;

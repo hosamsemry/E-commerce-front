@@ -329,9 +329,18 @@ function handleFormSubmit(event) {
 }
 
 async function deleteProduct(id) {
-  if (confirm('Are you sure you want to delete this product?')) {
+  Swal.fire({
+    title: 'Are you sure?',
+    text: 'You won\'t be able to revert this!',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+  }).then(async (result) => {
+    if (result.isConfirmed) {
       const res = await fetch(`http://localhost:3000/products/${id}`, { method: 'DELETE' });
-    if (res.ok) {
+      if (res.ok) {
         Swal.fire({
           icon: 'success',
           title: 'Product deleted successfully',
@@ -339,14 +348,15 @@ async function deleteProduct(id) {
           timer: 1500
         });
         fetchProducts();
-    } else {
+      } else {
         Swal.fire({
           icon: 'error',
           title: 'Failed to delete product',
           showConfirmButton: false,
           timer: 1500
         });
+      }
     }
-  }
+  });
 }
 document.getElementById('addProductForm').addEventListener('submit', handleFormSubmit);

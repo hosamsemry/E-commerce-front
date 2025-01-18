@@ -71,27 +71,61 @@ checkoutButton.addEventListener('click', () => {
         return;
     }
 
-    fetch('http://localhost:3000/orders', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(cart)
-    })
-    .then(response => response.json())
-    .then(() => {
-        localStorage.removeItem('cart');
+    const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
 
+    if (!currentUser || !currentUser.id) {
         Swal.fire({
-            title: 'Success!',
-            text: 'Order placed!',
-            icon: 'success',
-            confirmButtonText: 'OK',
-            timer: 2000
+            title: 'Error!',
+            text: 'User not logged in!',
+            icon: 'error',
+            confirmButtonText: 'OK'
         });
+        return;
+    }
 
-        document.getElementById('cart-items').innerHTML = '';
-        document.getElementById('total-price').textContent = 'Total Price: $0';
-    })
-    .catch(error => console.error('Error placing order:', error));
+    // Fetch existing orders to calculate the new order ID
+    fetch('http://localhost:3000/orders')
+        .then(response => response.json())
+        .then(orders => {
+            const newOrderId = (orders.length + 1).toString(); // ID is length of orders + 1
+
+            // Prepare the order object
+            const order = {
+                id: newOrderId,
+                customerId: currentUser.id, // Get the customer ID from sessionStorage
+                products: cart.products.map(product => ({
+                    productId: product.productId.toString(),
+                    quantity: product.quantity.toString()
+                })),
+                total: cart.total.toString(),
+                status: "pending" // Set default status as "pending"
+            };
+
+            // Send the new order to the backend
+            return fetch('http://localhost:3000/orders', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(order)
+            });
+        })
+        .then(response => response.json())
+        .then(() => {
+            localStorage.removeItem('cart');
+
+            Swal.fire({
+                title: 'Success!',
+                text: 'Order placed!',
+                icon: 'success',
+                confirmButtonText: 'OK',
+                timer: 2000
+            });
+
+            document.getElementById('cart-items').innerHTML = '';
+            document.getElementById('total-price').textContent = 'Total Price: $0';
+        })
+        .catch(error => console.error('Error placing order:', error));
 });
+
+

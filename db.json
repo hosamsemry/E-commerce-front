@@ -60,24 +60,9 @@
     },
     {
       "id": "11",
-      "username": "abdo",
+      "username": "soly",
       "password": "hosam",
-      "role": "customer",
-      "wishlist": []
-    },
-    {
-      "id": "12",
-      "username": "lamin",
-      "password": "hosam",
-      "role": "customer",
-      "wishlist": []
-    },
-    {
-      "id": "13",
-      "username": "messi",
-      "password": "hosam",
-      "role": "customer",
-      "wishlist": []
+      "role": "customer"
     }
   ],
   "products": [
@@ -161,15 +146,6 @@
       "rating": "4.7"
     },
     {
-      "name": "ring",
-      "price": "51",
-      "category": "Fashion",
-      "image": "https://www.miadonna.com/cdn/shop/products/Idyllic-Wedding-ring-set-Webwhite-001_1024x1024.jpg?v=1635379974",
-      "sellerId": "2",
-      "id": "10",
-      "rating": "4.3"
-    },
-    {
       "name": "office chair",
       "price": "60",
       "category": "Home Appliances",
@@ -188,13 +164,12 @@
       "rating": "4.5"
     },
     {
-      "id": "13",
       "name": "fan",
-      "price": "30",
+      "price": "33",
       "category": "Home Appliances",
       "image": "https://i5.walmartimages.com/seo/Mainstays-12-3-Speed-Oscillating-Table-Fan-FT30-8MBB-New-Black_0eb01f80-ee74-4343-b0a7-2629f7fae4b6.6beb73fb0c3e04f2caedce138495b98f.jpeg",
       "sellerId": "2",
-      "rating": "3.7"
+      "id": "13"
     },
     {
       "id": "14",
@@ -203,6 +178,14 @@
       "category": "Home Appliances",
       "image": "https://m.media-amazon.com/images/I/41zJKNu9MlL.jpg",
       "rating": "0"
+    },
+    {
+      "id": "14",
+      "name": "ring",
+      "price": "60",
+      "category": "Fashion",
+      "image": "https://www.miadonna.com/cdn/shop/products/Idyllic-Wedding-ring-set-Webwhite-001_1024x1024.jpg?v=1635379974",
+      "sellerId": "2"
     }
   ],
   "orders": [
@@ -316,7 +299,7 @@
         }
       ],
       "total": "510",
-      "status": "pending"
+      "status": "shipped"
     },
     {
       "id": "9",
@@ -332,13 +315,15 @@
     },
     {
       "id": "10",
+      "customerId": "9",
       "products": [
         {
-          "productId": 2,
-          "quantity": 1
+          "productId": "2",
+          "quantity": "1"
         }
       ],
-      "total": 42
+      "total": "42",
+      "status": "pending"
     }
   ]
 }
