@@ -77,6 +77,7 @@ async function fetchProducts() {
             <div class="product-li-seller">
           <span><font style="font-weight:bold; font-size:20px;color:#d14d07;">Product Name:</font> ${product.name}</span>
           <span><font style="font-weight:bold; font-size:20px;color:#d14d07;">Product Price:</font> $${product.price} </span> 
+          <span><font style="font-weight:bold; font-size:20px;color:#d14d07;">Status:</font> ${product.approved ? 'Approved' : 'Pending Approval'}</span>
             </div>  
           
           <img style="width:120px;margin-left:20px" src="${product.image}">
@@ -88,6 +89,7 @@ async function fetchProducts() {
       productList.appendChild(li);
   });
 }
+
 
 
 function showProductForm() {
@@ -107,6 +109,8 @@ async function addProduct(event) {
   const price = document.getElementById('productPrice').value;
   const category = document.getElementById('productCategory').value;
   const image = document.getElementById('imageLink').value;
+  const approved = false;
+  const rating = 1;
   const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
 
   if (!image) {
@@ -129,7 +133,9 @@ async function addProduct(event) {
       price,
       category,
       image,
-      sellerId: currentUser.id
+      sellerId: currentUser.id,
+      rating,
+      approved: false
   };
 
   const resPost = await fetch('http://localhost:3000/products', {

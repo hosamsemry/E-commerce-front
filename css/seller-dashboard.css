@@ -93,11 +93,18 @@ body {
     margin: 5px 0;
   }
   
-  .product-item button {
-    background-color: #e4610a;
+  .product-item .edit-btn {
+    background-color: #1100ff;
   }
-  .product-item button:hover {
-    background-color: #d14d07;
+  .product-item .edit-btn:hover {
+    background-color: #0747d1;
+
+  }
+  .product-item .delete-btn {
+    background-color: #ff0000;
+  }
+  .product-item .delete-btn:hover {
+    background-color: #8f0303;
 
   }
   
@@ -154,5 +161,17 @@ body {
     background-color: #ccc;
     border: none;
   }
+  #addProductForm{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
 
- 
+  #addProductForm input,select {
+    padding: 8px;
+    margin-left: 10px;
+    width: 98%;
+  }
+  #addProductForm select {
+    width: 99%;
+  }

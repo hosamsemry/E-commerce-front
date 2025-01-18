@@ -71,16 +71,20 @@
       "price": "50",
       "category": "Home Appliances",
       "image": "https://bosq.in/wp-content/uploads/2023/10/AYX-202-2-1.webp",
+      "sellerId": "2",
       "id": "1",
-      "rating": "4.2"
+      "rating": "4.2",
+      "approved": true
     },
     {
       "name": "Shoes",
       "price": "42",
       "category": "Fashion",
       "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3zNmNSpi0p8B8afXLc3hZ-DCe_STgV817_A&s",
+      "sellerId": "2",
       "id": "2",
-      "rating": "4.5"
+      "rating": "4.5",
+      "approved": true
     },
     {
       "name": "Mobile",
@@ -89,61 +93,68 @@
       "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqvN_qq1cL0FdvEoSH79Eq8tpT34YM28ak-w&s",
       "sellerId": "2",
       "id": "3",
-      "rating": "4.8"
+      "rating": "4.8",
+      "approved": true
     },
     {
       "id": "4",
       "name": "Headphones",
       "price": 150,
       "category": "Electronics",
-      "sellerId": 6,
+      "sellerId": "6",
       "image": "https://cdn.thewirecutter.com/wp-content/media/2023/07/bluetoothheadphones-2048px-0876.jpg",
-      "rating": "4.3"
+      "rating": "4.3",
+      "approved": true
     },
     {
       "id": "5",
       "name": "T-Shirt",
       "price": 20,
       "category": "Fashion",
-      "sellerId": 6,
+      "sellerId": "6",
       "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnCzUDMXD4c9ij1eb-aWyZIc8iwJrE3GGFvw&s",
-      "rating": "4.0"
+      "rating": "4.0",
+      "approved": true
     },
     {
       "id": "6",
       "name": "Smart Watch",
       "price": 250,
       "category": "Electronics",
-      "sellerId": 6,
+      "sellerId": "6",
       "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6XDsy0F5uBjoNWO9HoxGWUNAYgR3xIFsMfw&s",
-      "rating": "4.6"
+      "rating": "4.6",
+      "approved": true
     },
     {
       "id": "7",
       "name": "Blender",
       "price": 100,
       "category": "Home Appliances",
-      "sellerId": 6,
+      "sellerId": "6",
       "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcHnDTzFqPaLe5bxYI-E4_-6QEF84aYmGC7w&s",
-      "rating": "4.1"
+      "rating": "4.1",
+      "approved": true
     },
     {
       "id": "8",
       "name": "Microwave",
       "price": 300,
       "category": "Home Appliances",
-      "sellerId": 6,
+      "sellerId": "6",
       "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZ7UL704fDPgpRc-zZfjSMnatpxZieJgSZ8Q&s",
-      "rating": "4.4"
+      "rating": "4.4",
+      "approved": true
     },
     {
       "id": "9",
       "name": "Book",
       "price": "20",
       "category": "Books",
-      "sellerId": 6,
+      "sellerId": "6",
       "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJk3FQF_wznbvEZzNDPTnUTqRk2m_XGiwUDQ&s",
-      "rating": "4.7"
+      "rating": "4.7",
+      "approved": true
     },
     {
       "name": "office chair",
@@ -152,7 +163,8 @@
       "image": "https://images.globalindustrial.com/images/pdp/277436a.webp?t=1690198812370",
       "sellerId": "2",
       "id": "11",
-      "rating": "4.0"
+      "rating": "4.0",
+      "approved": true
     },
     {
       "id": "12",
@@ -161,7 +173,8 @@
       "category": "Electronics",
       "image": "https://goldentech.com.sa/media/catalog/product/cache/3b63c6023d7836f7abeed5960b50eab1/d/e/dell_s2421hn_24_computer_monitor_0.jpg",
       "sellerId": "2",
-      "rating": "4.5"
+      "rating": "4.5",
+      "approved": true
     },
     {
       "name": "fan",
@@ -169,7 +182,8 @@
       "category": "Home Appliances",
       "image": "https://i5.walmartimages.com/seo/Mainstays-12-3-Speed-Oscillating-Table-Fan-FT30-8MBB-New-Black_0eb01f80-ee74-4343-b0a7-2629f7fae4b6.6beb73fb0c3e04f2caedce138495b98f.jpeg",
       "sellerId": "2",
-      "id": "13"
+      "id": "13",
+      "approved": true
     },
     {
       "id": "14",
@@ -177,7 +191,9 @@
       "price": "5",
       "category": "Home Appliances",
       "image": "https://m.media-amazon.com/images/I/41zJKNu9MlL.jpg",
-      "rating": "0"
+      "sellerId": "2",
+      "rating": "0",
+      "approved": true
     },
     {
       "id": "14",
@@ -185,7 +201,19 @@
       "price": "60",
       "category": "Fashion",
       "image": "https://www.miadonna.com/cdn/shop/products/Idyllic-Wedding-ring-set-Webwhite-001_1024x1024.jpg?v=1635379974",
-      "sellerId": "2"
+      "sellerId": "2",
+      "rating": 1,
+      "approved": true
+    },
+    {
+      "id": "15",
+      "name": "Small Business Marketing",
+      "price": "40",
+      "category": "Books",
+      "image": "https://atkinsmarketingsolutions.com/wp-content/uploads/2021/07/StuBook1-e1434737871341-450x450.jpg",
+      "sellerId": "2",
+      "rating": 1,
+      "approved": true
     }
   ],
   "orders": [

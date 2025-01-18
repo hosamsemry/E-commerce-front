@@ -11,12 +11,14 @@
     <body>
         <header>
             <h1>Admin Dashboard</h1>
-            <nav style="width: 35%;margin: 0 auto;">
+            <nav style="margin: 0 auto;">
                 <ul>
                     <li><a href="home.html" >Shop</a></li>
                     <li><a href="#" onclick="showSection('users')">Users</a></li>
                     <li><a href="#" onclick="showSection('products')">Products</a></li>
                     <li><a href="#" onclick="showSection('orders')">Orders</a></li>
+                    <li><a href="#" onclick="showSection('products-review')">Review Products</a></li>
+                    <li><a href="login.html">Logout</a></li>
                 </ul>
             </nav>
         </header>
@@ -42,6 +44,14 @@
                 <h3>Order List</h3>
                 <ul id="orderList"></ul>
             </section>
+
+            <section id="products-review" class="section hidden">
+                <h2>Review Products</h2>
+                <h3>Unapproved Products</h3>
+                <ul id="adminProductList"></ul>
+            </section>
+            
+
         </main>
 
         <script src="../js/admin-dashboard.js"></script>

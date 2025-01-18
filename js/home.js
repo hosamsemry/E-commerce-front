@@ -32,7 +32,6 @@ window.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-   
     fetch("http://localhost:3000/products") 
         .then((response) => {
             if (!response.ok) {
@@ -41,6 +40,8 @@ window.addEventListener('DOMContentLoaded', () => {
             return response.json();
         })
         .then((products) => {
+            const approvedProducts = products.filter(product => product.approved === true);
+
             const renderProducts = (products) => {
                 productsContainer.innerHTML = '';
                 products.forEach(product => {
@@ -57,10 +58,8 @@ window.addEventListener('DOMContentLoaded', () => {
                     `;
                     productsContainer.appendChild(productCard);
                 });
-
             };
 
-            
             const renderCategories = (products) => {
                 categoryGrid.innerHTML = '';
                 const groupedProducts = products.reduce((acc, product) => {
@@ -94,19 +93,15 @@ window.addEventListener('DOMContentLoaded', () => {
                     categoryDiv.appendChild(productList);
                     categoryGrid.appendChild(categoryDiv);
                 });
-                
             };
 
-            
-            renderProducts(products);
-            renderCategories(products);
+            renderProducts(approvedProducts);
+            renderCategories(approvedProducts);
 
-            
-            
             searchButton.addEventListener('click', (e) => {
                 e.preventDefault();
                 const searchTerm = searchInput.value.toLowerCase();
-                const filteredProducts = products.filter(product =>
+                const filteredProducts = approvedProducts.filter(product =>
                     product.name.toLowerCase().includes(searchTerm) ||
                     product.category.toLowerCase().includes(searchTerm)
                 );
@@ -117,37 +112,35 @@ window.addEventListener('DOMContentLoaded', () => {
             searchInput.addEventListener('input', (e) => {
                 e.preventDefault();
                 const searchTerm = searchInput.value.toLowerCase();
-                const filteredProducts = products.filter(product =>
+                const filteredProducts = approvedProducts.filter(product =>
                     product.name.toLowerCase().includes(searchTerm) ||
                     product.category.toLowerCase().includes(searchTerm)
                 );
                 renderProducts(filteredProducts);
                 renderCategories(filteredProducts);
             });
-            
-            const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
-                addToCartButtons.forEach(button => {
-                    button.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        const productId = parseInt(button.getAttribute('data-id'));
-                        addToCart(productId);
-                    });
-                });
 
-                const addToWishlistButtons = document.querySelectorAll('.add-to-wishlist-btn');
-                addToWishlistButtons.forEach(button => {
-                    button.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        const productId = parseInt(button.getAttribute('data-id'));
-                        addToWishlist(productId);  
-                    });
+            const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const productId = parseInt(button.getAttribute('data-id'));
+                    addToCart(productId);
                 });
-            
+            });
+
+            const addToWishlistButtons = document.querySelectorAll('.add-to-wishlist-btn');
+            addToWishlistButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const productId = parseInt(button.getAttribute('data-id'));
+                    addToWishlist(productId);  
+                });
+            });
+
         })
         .catch((error) => console.error("Error fetching products:", error));
 
-
-        
     function addToCart(productId) {
         fetch(`http://localhost:3000/products/${productId}`)
             .then(response => response.json())
@@ -172,6 +165,4 @@ window.addEventListener('DOMContentLoaded', () => {
                 });
             });
     }
-
-    
 });
