@@ -110,9 +110,27 @@ body, h1, p, ul, li {
   font-size: 20px;
   width: 30%;
 }
-.feature-item h3{
+
+.feature-item{
   color: #e4610a;
   margin-bottom: 10px;
+}
+
+.feature-item .delivery  {
+  
+  animation: move-right-left 3s infinite;
+}
+
+@keyframes move-right-left {
+  0% {
+    transform: translateX(100%);
+  }
+  50% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
 }
 
 .feature-item p{
