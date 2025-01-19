@@ -83,25 +83,25 @@ checkoutButton.addEventListener('click', () => {
         return;
     }
 
-    // Fetch existing orders to calculate the new order ID
+   
     fetch('http://localhost:3000/orders')
         .then(response => response.json())
         .then(orders => {
-            const newOrderId = (orders.length + 1).toString(); // ID is length of orders + 1
+            const newOrderId = (orders.length + 1).toString();
 
-            // Prepare the order object
+            
             const order = {
                 id: newOrderId,
-                customerId: currentUser.id, // Get the customer ID from sessionStorage
+                customerId: currentUser.id, 
                 products: cart.products.map(product => ({
                     productId: product.productId.toString(),
                     quantity: product.quantity.toString()
                 })),
                 total: cart.total.toString(),
-                status: "pending" // Set default status as "pending"
+                status: "pending" 
             };
 
-            // Send the new order to the backend
+           
             return fetch('http://localhost:3000/orders', {
                 method: 'POST',
                 headers: {

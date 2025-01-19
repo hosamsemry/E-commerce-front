@@ -158,12 +158,12 @@ function loadOrders() {
                 orderDiv.appendChild(orderHeader);
                 
 
-                // Create a section to list the products in the order
+           
                 const productsList = document.createElement('div');
                 productsList.classList.add('order-products');
 
                 order.products.forEach(product => {
-                    // Fetch product details for each product in the order
+                    
                     fetch(`http://localhost:3000/products/${product.productId}`)
                         .then(response => {
                             if (!response.ok) throw new Error('Failed to fetch product details.');
@@ -196,7 +196,7 @@ function loadOrders() {
         .catch(err => console.error('Error loading orders:', err));
 }
 
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('load', () => {
     const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
     const protectedPages = ["profile.html", "checkout.html"];  
     const currentPage = window.location.pathname.split("/").pop();

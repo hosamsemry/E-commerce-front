@@ -2,7 +2,7 @@ const ORDERS = 'http://localhost:3000/orders';
 const PRODUCTS = 'http://localhost:3000/products';
 const addOrderForm = document.getElementById('addOrderForm');
 
-document.addEventListener("DOMContentLoaded", async () => {
+document.addEventListener("load", async () => {
     try {
         const response = await fetch(PRODUCTS);
         const products = await response.json();

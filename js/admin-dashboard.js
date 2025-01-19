@@ -185,7 +185,7 @@ async function approveProduct(productId) {
             showConfirmButton: false,
             timer: 1500
         });
-        fetchUnapprovedProducts(); // Refresh the list of unapproved products
+        fetchUnapprovedProducts();
     } else {
         Swal.fire({
             icon: 'error',
@@ -208,7 +208,7 @@ async function rejectProduct(productId) {
             showConfirmButton: false,
             timer: 1500
         });
-        fetchUnapprovedProducts(); // Refresh the list of unapproved products
+        fetchUnapprovedProducts(); 
     } else {
         Swal.fire({
             icon: 'error',

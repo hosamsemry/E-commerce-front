@@ -1,5 +1,5 @@
 import { addToWishlist } from "./profile.js";
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('load', () => {
     
     if (!sessionStorage.getItem('currentUser')) {
         document.querySelectorAll('.add-to-cart-btn').forEach(button => {
