@@ -1,7 +1,9 @@
 import { addToWishlist } from "./profile.js";
 window.addEventListener('load', () => {
-    
-    if (!sessionStorage.getItem('currentUser')) {
+    const currentUser = JSON.parse(sessionStorage.getItem('currentUser')); // Parse stored JSON object
+    const navLinks = document.querySelector('.nav-links');
+
+    if (!currentUser) {
         document.querySelectorAll('.add-to-cart-btn').forEach(button => {
             button.style.display = 'none';
         });
@@ -9,9 +11,23 @@ window.addEventListener('load', () => {
         document.getElementById('check-out').style.display = 'none';
         document.getElementById('profile').style.display = 'none';
         document.getElementById('logout').style.display = 'none';
-    }else{
+    } else {
         document.getElementById('login').style.display = 'none';
+
+        const dashBoard = document.createElement('li');
+
+        if (currentUser.role === 'admin') {
+            dashBoard.innerHTML = `<a href="admin-dashboard.html">Dashboard</a>`;
+        } else if (currentUser.role === 'seller') {
+            dashBoard.innerHTML = `<a href="seller-dashboard.html">Dashboard</a>`;
+        }
+
+        if (dashBoard.innerHTML && navLinks) {
+            navLinks.appendChild(dashBoard);
+        }
     }
+
+
 
     const logoutButton = document.getElementById('logout');
         if (logoutButton) {
@@ -25,7 +41,6 @@ window.addEventListener('load', () => {
     const categoryGrid = document.getElementById('category-grid');
     const searchInput = document.getElementById('search');
     const searchButton = document.getElementById('search-button');
-    const currentUser = sessionStorage.getItem('currentUser');
 
     if (!productsContainer || !categoryGrid) {
         console.error('Missing container elements');
