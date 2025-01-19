@@ -192,8 +192,8 @@ ul {
     font-size: 18px;
   }
 
-.btn {
-    background-color: #e4610a;
+.btn-edit {
+    background-color: #0044ff;
     color: white;
     border: none;
     border-radius: 5px;
@@ -203,10 +203,23 @@ ul {
     width: 80px;
     transition: .3s;
 }
-.btn:hover {
-    background-color: #d14d07;
+.btn-edit:hover {
+    background-color: #000e8d;
 }
-
+.btn-delete {
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 80px;
+    transition: .3s;
+}
+.btn-delete:hover {
+    background-color: #8d0000;
+}
 
 .order-list-admin {
     padding-bottom: 20px;

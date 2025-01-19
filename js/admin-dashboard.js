@@ -32,8 +32,8 @@ async function fetchUsers() {
                     <span><font style="font-weight:bold; font-size:20px;color:#d14d07;">User Role:</font> ${user.role}</span> 
                 </div>
                 <div class="btns">
-                    <button class="btn"><a style="text-decoration:none; color:white;" href="user-details.html?id=${user.id}">Edit</a></button>
-                    <button class="btn" onclick="deleteUser(${user.id})">Delete</button>
+                    <button class="btn-edit"><a style="text-decoration:none; color:white;" href="user-details.html?id=${user.id}">Edit</a></button>
+                    <button class="btn-delete" onclick="deleteUser(${user.id})">Delete</button>
                 </div>
             `;
             userList.appendChild(li);
@@ -63,7 +63,7 @@ async function fetchProducts() {
         `;
 
         const deleteBtn = document.createElement('button');
-        deleteBtn.classList.add('btn');
+        deleteBtn.classList.add('btn-delete');
         deleteBtn.textContent = 'Delete';
         deleteBtn.onclick = () => deleteProduct(product.id);
 
@@ -88,7 +88,7 @@ async function fetchOrders() {
 
         li.classList.add("order-list-admin");
         const deleteBtn = document.createElement('button');
-        deleteBtn.classList.add('btn');
+        deleteBtn.classList.add('btn-delete');
         deleteBtn.textContent = 'Delete';
         deleteBtn.onclick = () => deleteOrder(order.id);
         li.appendChild(deleteBtn);

@@ -110,7 +110,7 @@ async function addProduct(event) {
   const category = document.getElementById('productCategory').value;
   const image = document.getElementById('imageLink').value;
   const approved = false;
-  const rating = 1;
+  const rating = "1";
   const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
 
   if (!image) {
