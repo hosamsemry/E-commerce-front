@@ -1,3 +1,5 @@
+import FormValidator from './FormValidator'; 
+
 const USERS = 'http://localhost:3000/users';
 const addUserForm = document.getElementById('addUserForm');
 
@@ -7,6 +9,25 @@ addUserForm.addEventListener('submit', async (e) => {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
     const role = document.getElementById('role').value;
+    const usernameValidation = FormValidator.validateUsername(username);
+    const passwordValidation = FormValidator.validatePassword(password);
+    if (!usernameValidation.valid) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Invalid username',
+            text: usernameValidation.message
+        });
+        return;  
+    }
+
+    if (!passwordValidation.valid) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Invalid password',
+            text: passwordValidation.message
+        });
+        return;
+    }
 
     const response = await fetch(USERS);
     const users = await response.json();
